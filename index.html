@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AeroScope – Aviation Tech & News</title>
+  <title>AeroScope OS – Aviation Intelligence Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     name="description"
-    content="AeroScope is your live dashboard for aviation technology trends, aerospace innovation, and curated aviation news."
+    content="AeroScope OS is a futuristic aviation technology & news console with a refined, responsive interface."
   />
-  <!-- Google Font -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -18,20 +18,27 @@
 
   <style>
     :root {
-      --bg: #050814;
-      --bg-alt: #070b1e;
-      --card: #0c1024;
-      --accent: #4ea8ff;
-      --accent-soft: rgba(78, 168, 255, 0.2);
-      --accent-strong: #7b5cff;
-      --accent-danger: #ff6b6b;
-      --text: #f9fbff;
-      --muted: #9ca4c9;
-      --border: rgba(255, 255, 255, 0.06);
-      --radius-lg: 18px;
-      --radius-md: 12px;
+      --bg: #f5f7fb;
+      --bg-alt: #eef1f9;
+      --surface: #ffffff;
+      --surface-soft: rgba(255, 255, 255, 0.8);
+      --accent: #2563eb;
+      --accent-strong: #7c3aed;
+      --accent-soft: rgba(37, 99, 235, 0.14);
+      --accent-soft-2: rgba(124, 58, 237, 0.1);
+      --danger: #ef4444;
+      --text: #020617;
+      --muted: #6b7280;
+      --muted-soft: #9ca3af;
+      --border-subtle: rgba(15, 23, 42, 0.06);
+      --border-strong: rgba(37, 99, 235, 0.35);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+      --shadow-soft: 0 18px 60px rgba(15, 23, 42, 0.13);
+      --shadow-subtle: 0 8px 26px rgba(15, 23, 42, 0.08);
+      --nav-height: 64px;
     }
 
     * {
@@ -43,20 +50,23 @@
       margin: 0;
       padding: 0;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #111936 0, #050814 45%);
       color: var(--text);
       scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, #e0edff 0, transparent 60%),
+        radial-gradient(circle at top right, #f3e8ff 0, transparent 55%),
+        linear-gradient(to bottom, #f8fafc, #e5ebf8 55%, #eef2ff 100%);
       display: flex;
       flex-direction: column;
     }
 
     a {
-      color: inherit;
       text-decoration: none;
+      color: inherit;
     }
 
     img {
@@ -64,10 +74,26 @@
       display: block;
     }
 
+    /* Page */
+
     .page {
-      max-width: 1200px;
+      max-width: 1220px;
       margin: 0 auto;
-      padding: 18px 18px 48px;
+      padding: 18px 18px 40px;
+    }
+
+    /* Frosted glass helper */
+
+    .glass {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.92),
+        rgba(255, 255, 255, 0.78)
+      );
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
     }
 
     /* Header / Nav */
@@ -76,43 +102,75 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(14px);
       background: linear-gradient(
         to bottom,
-        rgba(5, 8, 20, 0.9),
-        rgba(5, 8, 20, 0.6),
+        rgba(248, 250, 252, 0.98),
+        rgba(248, 250, 252, 0.9),
+        rgba(248, 250, 252, 0.7),
         transparent
       );
     }
 
-    .nav {
-      max-width: 1200px;
-      margin: 0 auto 14px;
-      padding: 10px 18px 0;
+    .nav-shell {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 10px 18px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .logo-mark {
-      width: 32px;
-      height: 32px;
+    .logo-orbit {
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 1px solid var(--accent-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at 30% 20%, #4ea8ff 0, #111936 45%, #050814 90%);
-      box-shadow: 0 0 18px rgba(78, 168, 255, 0.6);
-      font-size: 16px;
-      font-weight: 700;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 20%, #eff6ff 0, #bfdbfe 22%, #1d4ed8 60%, #0b1120 100%);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.45),
+        0 10px 30px rgba(37, 99, 235, 0.4);
+      overflow: hidden;
+    }
+
+    .logo-orbit::before,
+    .logo-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.8);
+    }
+
+    .logo-orbit::before {
+      inset: 7px;
+      opacity: 0.7;
+    }
+
+    .logo-orbit::after {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #e5e7eb;
+      top: 8px;
+      left: 3px;
+      transform: rotate(-22deg);
+      box-shadow: 0 0 12px rgba(248, 250, 252, 0.7);
+    }
+
+    .logo-jet {
+      position: absolute;
+      right: 8px;
+      bottom: 7px;
+      font-size: 14px;
+      color: #e5ecff;
+      text-shadow: 0 0 6px rgba(15, 23, 42, 0.6);
     }
 
     .logo-text {
@@ -124,165 +182,182 @@
     .logo-title {
       font-size: 18px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-title span {
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--accent-soft), rgba(22, 163, 74, 0.1));
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
     }
 
     .logo-sub {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: var(--muted);
+      color: var(--muted-soft);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       font-size: 13px;
     }
 
     .nav-links a {
-      padding: 6px 10px;
-      border-radius: 999px;
+      padding: 7px 10px;
+      border-radius: var(--radius-pill);
       color: var(--muted);
       border: 1px solid transparent;
-      transition: 0.2s ease all;
+      transition: 0.18s ease all;
     }
 
     .nav-links a:hover {
       color: var(--text);
-      border-color: var(--accent-soft);
-      background: rgba(15, 23, 42, 0.7);
+      border-color: var(--border-subtle);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
     }
 
-    .nav-cta {
+    .nav-right {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .nav-pill {
+    .pill-live {
       border-radius: var(--radius-pill);
-      border: 1px solid var(--accent-soft);
-      padding: 6px 11px;
+      padding: 6px 10px;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.2);
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
+      letter-spacing: 0.16em;
+      color: #1d4ed8;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(15, 23, 42, 0.7);
     }
 
-    .nav-pill-dot {
-      width: 6px;
-      height: 6px;
+    .pill-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
-      background: #00ffb2;
-      box-shadow: 0 0 12px rgba(0, 255, 178, 0.9);
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
     }
 
-    .btn-subscribe-nav {
+    .btn-nav {
       border-radius: var(--radius-pill);
       border: none;
       padding: 7px 14px;
       font-size: 12px;
       font-weight: 500;
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #f5f7ff;
+      color: #f9fafb;
       cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 10px 24px rgba(78, 168, 255, 0.5);
+      gap: 7px;
     }
 
-    .btn-subscribe-nav span {
+    .btn-nav span {
       font-size: 14px;
     }
 
     .nav-toggle {
       display: none;
-      border-radius: 999px;
-      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
       padding: 6px 10px;
-      background: rgba(7, 11, 30, 0.9);
       cursor: pointer;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .mobile-menu {
+      max-width: 1220px;
+      margin: 0 auto 10px;
+      padding: 8px 18px 10px;
       display: none;
       flex-direction: column;
       gap: 8px;
-      margin: 0 18px 10px;
-      padding: 10px 12px 12px;
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(5, 8, 20, 0.96);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
     }
 
     .mobile-menu a {
-      font-size: 14px;
+      font-size: 13px;
       padding: 6px 4px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       color: var(--muted);
     }
 
     .mobile-menu a:hover {
-      background: rgba(15, 23, 42, 0.9);
+      background: #eff6ff;
       color: var(--text);
     }
 
     /* Hero */
 
-    .hero {
+    .hero-shell {
       margin-top: 12px;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-      gap: 26px;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 20px;
       align-items: center;
     }
 
-    .hero-copy {
+    .hero-left {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .hero-badge {
+    .hero-pill-row {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+      gap: 10px;
+      padding: 5px 7px;
       border-radius: var(--radius-pill);
-      border: 1px solid var(--accent-soft);
-      padding: 5px 10px;
-      background: rgba(12, 16, 36, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
+      font-size: 11px;
       color: var(--muted);
     }
 
-    .hero-badge-tag {
+    .hero-pill-tag {
       padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(74, 222, 128, 0.12);
-      color: #4ade80;
-      font-size: 10px;
-      font-weight: 500;
+      border-radius: var(--radius-pill);
+      background: rgba(22, 163, 74, 0.08);
+      color: #15803d;
       text-transform: uppercase;
       letter-spacing: 0.16em;
+      font-weight: 500;
     }
 
     .hero-title {
-      font-size: clamp(30px, 4vw, 40px);
-      line-height: 1.1;
+      font-size: clamp(30px, 4.2vw, 42px);
+      line-height: 1.08;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
-    .hero-title span {
+    .hero-highlight {
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
       -webkit-background-clip: text;
       background-clip: text;
@@ -291,100 +366,101 @@
 
     .hero-sub {
       font-size: 14px;
-      line-height: 1.7;
-      max-width: 460px;
       color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 4px;
+      gap: 10px;
     }
 
     .btn-primary {
       border-radius: var(--radius-pill);
+      border: none;
       padding: 9px 18px;
       font-size: 13px;
       font-weight: 600;
-      border: none;
       cursor: pointer;
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: var(--text);
+      color: #f9fafb;
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.45);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: var(--shadow-soft);
     }
 
     .btn-ghost {
       border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(255, 255, 255, 0.9);
       padding: 9px 16px;
       font-size: 13px;
       font-weight: 500;
-      border: 1px solid var(--border);
       cursor: pointer;
-      background: rgba(7, 11, 30, 0.9);
       color: var(--muted);
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
     }
 
     .hero-metrics {
+      margin-top: 4px;
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 8px;
+      gap: 12px;
       font-size: 11px;
       color: var(--muted);
     }
 
     .hero-metric {
-      padding: 9px 12px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(7, 11, 30, 0.75);
+      min-width: 130px;
+      border-radius: 16px;
+      padding: 9px 11px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      min-width: 120px;
+      gap: 3px;
     }
 
     .hero-metric strong {
       font-size: 16px;
-      font-weight: 600;
       color: var(--text);
     }
 
-    .hero-graphic {
+    .hero-right {
       position: relative;
-      height: 100%;
       min-height: 260px;
     }
 
     .hero-panel {
       position: relative;
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      background:
+        radial-gradient(circle at top left, rgba(219, 234, 254, 0.9) 0, rgba(255, 255, 255, 0.98) 40%),
+        radial-gradient(circle at bottom right, rgba(221, 214, 254, 0.85) 0, rgba(255, 255, 255, 0.96) 55%);
       box-shadow: var(--shadow-soft);
-      padding: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 14px 14px 12px;
       overflow: hidden;
-      height: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .hero-panel::before {
       content: "";
       position: absolute;
-      inset: -20%;
-      background-image: radial-gradient(circle at 10% 10%, rgba(148, 163, 255, 0.14), transparent 50%),
-        radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.13), transparent 55%),
-        radial-gradient(circle at 70% 100%, rgba(248, 250, 252, 0.06), transparent 60%);
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.13), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(147, 51, 234, 0.12), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 0.14), transparent 60%);
       opacity: 0.9;
       pointer-events: none;
     }
@@ -393,27 +469,33 @@
       position: relative;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
+      gap: 8px;
       z-index: 1;
     }
 
-    .panel-tag {
+    .panel-label {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--muted);
     }
 
+    .panel-title {
+      font-size: 13px;
+      color: var(--muted-soft);
+    }
+
     .panel-chip {
-      padding: 5px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 255, 0.5);
+      padding: 6px 9px;
+      border-radius: var(--radius-pill);
       font-size: 11px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      backdrop-filter: blur(8px);
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      backdrop-filter: blur(10px);
     }
 
     .panel-chip-dot {
@@ -421,24 +503,27 @@
       height: 7px;
       border-radius: 999px;
       background: #22c55e;
-      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+    }
+
+    .panel-chip span {
+      font-weight: 500;
     }
 
     .flight-map {
       position: relative;
       z-index: 1;
-      margin-top: 10px;
-      flex: 1;
-      border-radius: var(--radius-md);
-      border: 1px dashed rgba(148, 163, 255, 0.5);
-      padding: 12px;
-      background: rgba(15, 23, 42, 0.75);
+      margin-top: 6px;
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .flight-map-header {
+    .flight-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -447,19 +532,20 @@
     }
 
     .flight-route {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       font-size: 12px;
       font-weight: 500;
+      color: var(--text);
     }
 
-    .flight-dot {
+    .route-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 12px rgba(78, 168, 255, 0.9);
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.9);
     }
 
     .flight-route span {
@@ -470,40 +556,45 @@
 
     .trajectory {
       display: flex;
-      gap: 6px;
       align-items: center;
-      margin-top: 6px;
+      gap: 8px;
     }
 
     .trajectory-line {
       flex: 1;
       height: 3px;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), rgba(148, 163, 255, 0.2));
+      background: linear-gradient(90deg, var(--accent), rgba(59, 130, 246, 0.05));
       position: relative;
       overflow: hidden;
     }
 
     .trajectory-plane {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 255, 0.7);
-      background: radial-gradient(circle at 30% 30%, #e5f4ff 0, #1d2841 60%);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background:
+        radial-gradient(circle at 30% 30%, #eff6ff 0, #bfdbfe 45%, #1d4ed8 95%);
       top: 50%;
       transform: translate(-50%, -50%);
-      animation: fly 4.2s infinite linear;
+      animation: glide 4.3s infinite linear;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #eff6ff;
     }
 
     .trajectory-label {
       font-size: 11px;
       color: var(--muted);
-      min-width: 82px;
+      min-width: 86px;
       text-align: right;
     }
 
-    @keyframes fly {
+    @keyframes glide {
       from {
         left: 0%;
       }
@@ -514,16 +605,16 @@
 
     .flight-stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
       font-size: 11px;
     }
 
     .flight-stat {
-      padding: 7px 8px;
       border-radius: 12px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 255, 0.3);
+      padding: 7px 9px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -535,40 +626,42 @@
     }
 
     .flight-stat strong {
+      color: var(--text);
       font-size: 12px;
     }
 
     .panel-footer {
       position: relative;
       z-index: 1;
-      margin-top: 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: 4px;
       font-size: 11px;
       color: var(--muted);
     }
 
-    .panel-badges {
+    .panel-tags {
       display: flex;
-      gap: 6px;
       flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .panel-badge {
+    .panel-tag {
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 255, 0.3);
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid rgba(209, 213, 219, 0.9);
     }
 
     /* Ticker */
 
     .ticker {
-      margin-top: 20px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(7, 11, 30, 0.9);
+      margin-top: 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -577,28 +670,31 @@
 
     .ticker-label {
       padding: 8px 12px;
-      background: rgba(148, 163, 255, 0.18);
+      background: linear-gradient(
+        135deg,
+        rgba(37, 99, 235, 0.08),
+        rgba(124, 58, 237, 0.08)
+      );
+      border-right: 1px solid var(--border-subtle);
       text-transform: uppercase;
       letter-spacing: 0.16em;
       font-size: 10px;
       font-weight: 600;
+      color: #1d4ed8;
     }
 
     .ticker-track {
-      position: relative;
-      overflow: hidden;
       flex: 1;
+      overflow: hidden;
+      position: relative;
     }
 
     .ticker-items {
       display: inline-flex;
       gap: 30px;
-      padding-left: 18px;
+      padding-inline: 18px;
       white-space: nowrap;
-      animation: ticker 26s linear infinite;
-    }
-
-    .ticker-item {
+      animation: tickerMove 26s linear infinite;
       color: var(--muted);
     }
 
@@ -606,7 +702,7 @@
       color: var(--accent);
     }
 
-    @keyframes ticker {
+    @keyframes tickerMove {
       from {
         transform: translateX(0%);
       }
@@ -618,17 +714,17 @@
     /* Sections */
 
     main {
-      margin-top: 28px;
+      margin-top: 24px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 22px;
     }
 
     section {
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      background: rgba(7, 11, 30, 0.96);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
       padding: 16px 16px 18px;
     }
 
@@ -636,9 +732,9 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      gap: 16px;
-      margin-bottom: 14px;
+      gap: 14px;
       flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
     .section-title-wrap {
@@ -651,41 +747,49 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--muted);
+      color: var(--muted-soft);
     }
 
     .section-title {
       font-size: 18px;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
     .section-sub {
       font-size: 12px;
       color: var(--muted);
+      max-width: 430px;
     }
 
     .section-controls {
       display: flex;
-      align-items: center;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
 
+    /* Inputs */
+
     select,
-    input[type="search"] {
+    input[type="search"],
+    input[type="email"] {
       border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: #f9fafb;
       color: var(--text);
-      padding: 6px 14px;
+      padding: 7px 13px;
       font-size: 12px;
       outline: none;
       min-width: 140px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
     }
 
-    input[type="search"]::placeholder {
-      color: var(--muted);
+    input::placeholder {
+      color: var(--muted-soft);
     }
+
+    /* Chips */
 
     .chip-row {
       display: flex;
@@ -694,24 +798,25 @@
     }
 
     .chip {
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
+      border-radius: var(--radius-pill);
+      padding: 6px 11px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: #f9fafb;
       font-size: 11px;
       color: var(--muted);
       cursor: pointer;
-      transition: 0.18s ease all;
+      transition: 0.15s ease all;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
     }
 
     .chip.active {
-      border-color: var(--accent);
-      color: var(--text);
-      background: rgba(37, 99, 235, 0.2);
-      box-shadow: 0 0 18px rgba(59, 130, 246, 0.4);
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent-soft-2));
+      border-color: var(--border-strong);
+      color: #1e293b;
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.3);
     }
 
-    /* Tech Grid */
+    /* Tech grid */
 
     .grid {
       display: grid;
@@ -722,39 +827,41 @@
     .card {
       position: relative;
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at top, #0b1220 0, #020617 70%);
       padding: 12px;
+      background:
+        radial-gradient(circle at top left, rgba(239, 246, 255, 0.9) 0, #ffffff 42%, #f9fafb 100%);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: var(--shadow-subtle);
+      font-size: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      font-size: 12px;
       overflow: hidden;
       cursor: default;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
     }
 
     .card::before {
       content: "";
       position: absolute;
       inset: -40%;
+      background: radial-gradient(circle at top, rgba(129, 140, 248, 0.15), transparent 55%);
       opacity: 0;
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 50%);
-      transition: opacity 0.2s ease;
       pointer-events: none;
+      transition: opacity 0.18s ease;
     }
 
     .card:hover {
       transform: translateY(-3px);
-      border-color: rgba(96, 165, 250, 0.8);
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+      border-color: rgba(129, 140, 248, 0.7);
     }
 
     .card:hover::before {
       opacity: 1;
     }
 
-    .card-tag-row {
+    .card-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -763,24 +870,18 @@
       color: var(--muted);
     }
 
-    .card-tag {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 255, 0.5);
-      background: rgba(15, 23, 42, 0.9);
+    .card-badge {
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      background: rgba(239, 246, 255, 0.9);
+      font-weight: 500;
+      color: #1d4ed8;
     }
 
     .card-title {
       font-size: 14px;
       font-weight: 600;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--muted);
     }
 
     .pill-row {
@@ -791,17 +892,18 @@
     }
 
     .pill {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 255, 0.4);
-      padding: 2px 7px;
-      background: rgba(15, 23, 42, 0.85);
+      border-radius: var(--radius-pill);
+      padding: 3px 7px;
+      background: #eef2ff;
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      color: #4338ca;
     }
 
     .card-footer {
+      margin-top: 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 4px;
       font-size: 11px;
       color: var(--muted);
     }
@@ -816,8 +918,7 @@
     }
 
     .card-link span {
-      font-size: 15px;
-      transform: translateY(1px);
+      font-size: 16px;
     }
 
     /* News layout */
@@ -831,7 +932,7 @@
     .news-main {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 11px;
     }
 
     .news-card {
@@ -839,24 +940,26 @@
       grid-template-columns: 140px minmax(0, 1fr);
       gap: 10px;
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      padding: 10px;
-      background: radial-gradient(circle at top left, #111827 0, #020617 65%);
+      padding: 10px 10px;
+      background: radial-gradient(circle at top left, #eff6ff 0, #ffffff 40%, #f9fafb 100%);
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: var(--shadow-subtle);
       cursor: pointer;
-      transition: 0.18s ease all;
+      transition: 0.16s ease all;
     }
 
     .news-card:hover {
-      border-color: rgba(96, 165, 250, 0.8);
-      box-shadow: var(--shadow-soft);
       transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+      border-color: rgba(129, 140, 248, 0.7);
     }
 
     .news-thumb {
-      border-radius: 10px;
-      background-size: cover;
-      background-position: center;
-      background-image: linear-gradient(135deg, #0f172a, #020617);
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.18), transparent 55%),
+        radial-gradient(circle at 90% 90%, rgba(124, 58, 237, 0.16), transparent 50%),
+        linear-gradient(135deg, #e5e7eb, #f9fafb);
       position: relative;
       overflow: hidden;
     }
@@ -866,17 +969,17 @@
       left: 8px;
       bottom: 8px;
       padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.86);
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.76);
+      color: #e5e7eb;
       font-size: 10px;
-      color: var(--muted);
-      border: 1px solid rgba(148, 163, 255, 0.5);
+      border: 1px solid rgba(249, 250, 251, 0.8);
     }
 
     .news-body {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       font-size: 12px;
     }
 
@@ -894,7 +997,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 6px;
+      gap: 4px;
       font-size: 11px;
       color: var(--muted);
       margin-top: 4px;
@@ -906,6 +1009,14 @@
       gap: 10px;
     }
 
+    .news-sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     .news-chip-list {
       display: grid;
       gap: 8px;
@@ -915,15 +1026,17 @@
     .news-mini {
       padding: 7px 9px;
       border-radius: 12px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--border);
+      background: #f9fafb;
+      border: 1px solid rgba(226, 232, 240, 0.98);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
       cursor: pointer;
-      transition: 0.18s ease all;
+      transition: 0.15s ease all;
     }
 
     .news-mini:hover {
-      border-color: rgba(96, 165, 250, 0.8);
       transform: translateY(-1px);
+      border-color: rgba(129, 140, 248, 0.7);
+      background: #eff6ff;
     }
 
     .news-mini-title {
@@ -932,7 +1045,7 @@
       margin-bottom: 3px;
     }
 
-    /* Insights / Timeline */
+    /* Insights */
 
     .insights-grid {
       display: grid;
@@ -942,27 +1055,35 @@
 
     .insights-card {
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
       padding: 12px;
-      background: radial-gradient(circle at top, #020617 0, #020617 80%);
+      background:
+        radial-gradient(circle at top left, #e0f2fe 0, #eff6ff 25%, #ffffff 70%);
+      border: 1px solid rgba(226, 232, 240, 0.96);
+      box-shadow: var(--shadow-subtle);
+      font-size: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      font-size: 12px;
     }
 
     .badge-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       font-size: 11px;
       color: var(--muted);
     }
 
+    .badge-row span:first-child {
+      font-weight: 500;
+      color: #111827;
+    }
+
     .timeline {
-      margin-top: 8px;
+      margin-top: 6px;
       border-radius: 14px;
-      border: 1px dashed rgba(148, 163, 255, 0.5);
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: rgba(249, 250, 251, 0.9);
       padding: 10px;
       display: grid;
       gap: 10px;
@@ -970,18 +1091,20 @@
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 80px minmax(0, 1fr);
+      grid-template-columns: 76px minmax(0, 1fr);
       gap: 10px;
       font-size: 11px;
     }
 
     .timeline-year {
       color: var(--muted);
+      font-weight: 500;
     }
 
     .timeline-desc {
       position: relative;
       padding-left: 14px;
+      color: var(--muted);
     }
 
     .timeline-dot {
@@ -992,7 +1115,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 14px rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.9);
     }
 
     .insights-chart {
@@ -1006,14 +1129,20 @@
 
     .chart-bar {
       position: relative;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(79, 70, 229, 0.3));
-      overflow: hidden;
+      border-radius: 12px 12px 10px 10px;
+      background: linear-gradient(180deg, #2563eb, #7c3aed);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.45);
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      font-size: 10px;
       color: #e5edff;
+      font-size: 11px;
+      overflow: hidden;
+    }
+
+    .chart-bar span {
+      margin-bottom: 4px;
+      font-weight: 500;
     }
 
     .chart-bar::after {
@@ -1022,12 +1151,6 @@
       bottom: -16px;
       font-size: 10px;
       color: var(--muted);
-    }
-
-    .chart-bar span {
-      margin-bottom: 4px;
-      font-weight: 500;
-      font-size: 11px;
     }
 
     .chart-caption {
@@ -1040,7 +1163,7 @@
 
     .about-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.3fr);
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.4fr);
       gap: 16px;
     }
 
@@ -1048,18 +1171,19 @@
       font-size: 12px;
       color: var(--muted);
       display: grid;
-      gap: 10px;
+      gap: 9px;
     }
 
     .about-highlight {
+      margin-top: 4px;
       padding: 9px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      background: rgba(249, 250, 251, 0.96);
+      border: 1px dashed rgba(148, 163, 184, 0.9);
       display: flex;
       justify-content: space-between;
-      gap: 10px;
       align-items: center;
+      gap: 10px;
       font-size: 11px;
     }
 
@@ -1069,9 +1193,11 @@
 
     .newsletter-card {
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at top, #0f172a 0, #020617 80%);
       padding: 12px;
+      background:
+        radial-gradient(circle at top, rgba(219, 234, 254, 0.9) 0, #ffffff 55%, #eef2ff 100%);
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      box-shadow: var(--shadow-subtle);
       display: grid;
       gap: 8px;
       font-size: 12px;
@@ -1090,16 +1216,18 @@
     }
 
     .btn-small {
-      padding: 7px 14px;
       border-radius: var(--radius-pill);
       border: none;
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: var(--text);
+      color: #f9fafb;
+      padding: 8px 14px;
       font-size: 12px;
+      font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
     }
 
     .newsletter-note {
@@ -1110,28 +1238,28 @@
     /* Footer */
 
     footer {
-      margin-top: 24px;
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(209, 213, 219, 0.9);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
       font-size: 11px;
       color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
     }
 
     .footer-links {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
     }
 
     .footer-links a {
       padding: 2px 4px;
     }
 
-    /* Floating buttons */
+    /* Floating controls */
 
     .floating-controls {
       position: fixed;
@@ -1147,27 +1275,21 @@
       width: 38px;
       height: 38px;
       border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(7, 11, 30, 0.96);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
       cursor: pointer;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.7);
+      font-size: 17px;
+      transition: 0.18s ease all;
     }
 
     .fab.hidden {
       opacity: 0;
       pointer-events: none;
       transform: translateY(12px);
-      transition: all 0.18s ease;
-    }
-
-    .fab:not(.hidden) {
-      opacity: 1;
-      transform: translateY(0);
-      transition: all 0.18s ease;
     }
 
     .fab-theme {
@@ -1179,7 +1301,8 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.2);
+      backdrop-filter: blur(10px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -1193,13 +1316,17 @@
     .modal {
       max-width: 640px;
       width: 94%;
-      max-height: 80vh;
+      max-height: 82vh;
       overflow: auto;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: rgba(7, 11, 30, 0.98);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
-      padding: 16px;
+      border-radius: 22px;
+      background: linear-gradient(
+        145deg,
+        rgba(248, 250, 252, 0.98),
+        rgba(255, 255, 255, 0.98)
+      );
+      border: 1px solid rgba(209, 213, 219, 0.95);
+      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.32);
+      padding: 16px 16px 14px;
       font-size: 13px;
     }
 
@@ -1217,10 +1344,10 @@
     }
 
     .modal-close {
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 3px 7px;
-      background: transparent;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      padding: 4px 9px;
+      background: #f9fafb;
       color: var(--muted);
       cursor: pointer;
       font-size: 12px;
@@ -1229,11 +1356,11 @@
     .modal-meta {
       font-size: 11px;
       color: var(--muted);
-      margin-bottom: 8px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 6px;
+      margin-bottom: 8px;
     }
 
     .modal-body {
@@ -1254,20 +1381,17 @@
     /* Responsive */
 
     @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: minmax(0, 1.1fr);
+      .hero-shell {
+        grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-graphic {
+      .hero-right {
         order: -1;
       }
-
       .news-layout,
       .insights-grid,
       .about-layout {
         grid-template-columns: minmax(0, 1fr);
       }
-
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -1275,195 +1399,186 @@
 
     @media (max-width: 768px) {
       .nav-links,
-      .nav-cta {
+      .nav-right {
         display: none;
       }
-
       .nav-toggle {
         display: flex;
       }
-
-      .hero {
-        margin-top: 8px;
-      }
-
       .ticker {
         flex-direction: column;
+        align-items: stretch;
       }
-
       .ticker-label {
-        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
       }
-
-      .ticker-track {
-        width: 100%;
-      }
-
       .grid {
         grid-template-columns: minmax(0, 1fr);
       }
-
       .news-card {
         grid-template-columns: minmax(0, 1fr);
       }
-
       .flight-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       .page {
-        padding: 14px 12px 36px;
+        padding: 14px 12px 30px;
       }
-
       section {
         padding: 12px;
       }
-
       .section-header {
         flex-direction: column;
         align-items: flex-start;
       }
-
-      .hero-metric {
-        min-width: 100px;
-      }
-
       .floating-controls {
         right: 12px;
         bottom: 12px;
       }
-
-      .nav {
+      .nav-shell {
         padding-inline: 12px;
       }
-
       .mobile-menu {
-        margin-inline: 12px;
+        padding-inline: 12px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
-    <nav class="nav">
+    <div class="nav-shell">
       <div class="nav-left">
-        <div class="logo-mark">✈︎</div>
+        <div class="logo-orbit">
+          <div class="logo-jet">✈︎</div>
+        </div>
         <div class="logo-text">
-          <div class="logo-title">AeroScope</div>
-          <div class="logo-sub">Aviation • Tech • Intel</div>
+          <div class="logo-title">
+            AeroScope OS
+            <span>Gen-Aviation Console</span>
+          </div>
+          <div class="logo-sub">Aviation · Technology · Signals</div>
         </div>
       </div>
-      <div class="nav-links">
+
+      <nav class="nav-links">
         <a href="#top">Overview</a>
         <a href="#tech">Tech Radar</a>
-        <a href="#news">News Feed</a>
+        <a href="#news">News</a>
         <a href="#insights">Insights</a>
         <a href="#about">About</a>
-      </div>
-      <div class="nav-cta">
-        <div class="nav-pill">
-          <span class="nav-pill-dot"></span>
-          Live aviation brief
+      </nav>
+
+      <div class="nav-right">
+        <div class="pill-live">
+          <span class="pill-dot"></span> Live feed
         </div>
-        <button class="btn-subscribe-nav" data-scroll="#newsletter">
-          <span>★</span> Subscribe
+        <button class="btn-nav" data-scroll="#newsletter">
+          Get briefings
+          <span>↗</span>
         </button>
       </div>
+
       <button class="nav-toggle" id="navToggle">☰</button>
-    </nav>
+    </div>
+
     <div class="mobile-menu" id="mobileMenu">
       <a href="#top">Overview</a>
       <a href="#tech">Tech Radar</a>
-      <a href="#news">News Feed</a>
+      <a href="#news">News</a>
       <a href="#insights">Insights</a>
       <a href="#about">About</a>
       <a href="#newsletter">Newsletter</a>
     </div>
   </header>
 
+  <!-- PAGE -->
   <div class="page" id="top">
     <!-- HERO -->
-
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="hero-badge">
-          <span class="hero-badge-tag">Live</span>
-          Real-time view of aviation innovation
+    <section class="hero-shell glass">
+      <div class="hero-left">
+        <div class="hero-pill-row">
+          <span class="hero-pill-tag">New</span>
+          Aviation technology, mapped in real time
         </div>
+
         <h1 class="hero-title">
-          Track <span>aviation technology</span> & breaking aerospace news in one responsive console.
+          A futuristic console for
+          <span class="hero-highlight">aviation technology & news</span>.
         </h1>
+
         <p class="hero-sub">
-          AeroScope blends curated news, technology radar, and trend insight into a single interface—designed for
-          engineers, students, and aviation obsessives.
+          AeroScope OS gives you a clean, responsive cockpit for aviation updates—tech radar, curated headlines,
+          and trend insights—crafted with the polish of a modern AI product.
         </p>
 
         <div class="hero-actions">
           <button class="btn-primary" data-scroll="#news">
-            Open live briefing <span>↗</span>
+            Open live briefing
+            <span>↗</span>
           </button>
           <button class="btn-ghost" data-scroll="#tech">
-            Explore tech radar
+            Browse tech radar
           </button>
         </div>
 
         <div class="hero-metrics">
           <div class="hero-metric">
             <strong id="metricArticles">32</strong>
-            stories in the last 24 hours
+            stories in the current set
           </div>
           <div class="hero-metric">
-            <strong id="metricDomains">12</strong>
-            tracked domains & categories
+            <strong>12</strong>
+            domains & tech categories
           </div>
           <div class="hero-metric">
-            <strong>Real-time</strong>
-            layout fully responsive
+            <strong>100%</strong>
+            responsive, single-file front-end
           </div>
         </div>
       </div>
 
-      <div class="hero-graphic">
+      <div class="hero-right">
         <div class="hero-panel">
           <div class="panel-top">
             <div>
-              <div class="panel-tag">Flight systems snapshot</div>
-              <div style="font-size: 11px; color: var(--muted); margin-top: 2px;">
-                Synthetic telemetry from next-gen narrow-body jets
+              <div class="panel-label">Synthetic telemetry · Demo</div>
+              <div class="panel-title">
+                Hydrogen-assisted test route · FRA → DXB
               </div>
             </div>
             <div class="panel-chip">
               <span class="panel-chip-dot"></span>
-              Stable conditions
+              Stable cruise
             </div>
           </div>
 
           <div class="flight-map">
-            <div class="flight-map-header">
+            <div class="flight-header">
               <div class="flight-route">
-                <div class="flight-dot"></div>
+                <div class="route-dot"></div>
                 FRA ➝ DXB
-                <span> Hydrogen-assisted test route</span>
+                <span>Hydrogen hybrid · Test campaign 03</span>
               </div>
-              <div style="font-size: 11px;">
-                FL370 • Mach 0.78
-              </div>
+              <div>FL370 • Mach 0.78</div>
             </div>
 
             <div class="trajectory">
               <div class="trajectory-line">
-                <div class="trajectory-plane"></div>
+                <div class="trajectory-plane">✈</div>
               </div>
               <div class="trajectory-label">
-                ETA: <strong>02:13</strong> hrs
+                ETA <strong>02:13</strong> hrs
               </div>
             </div>
 
             <div class="flight-stats">
               <div class="flight-stat">
-                <span>Fuel burn vs. baseline</span>
+                <span>Fuel burn vs baseline</span>
                 <strong>-21.4%</strong>
               </div>
               <div class="flight-stat">
@@ -1471,69 +1586,60 @@
                 <strong>32.9%</strong>
               </div>
               <div class="flight-stat">
-                <span>Auto-pilot confidence</span>
+                <span>Autopilot confidence</span>
                 <strong>99.2%</strong>
               </div>
             </div>
           </div>
 
           <div class="panel-footer">
-            <div class="panel-badges">
-              <div class="panel-badge">Hydrogen hybrid systems</div>
-              <div class="panel-badge">Autonomous climb & cruise</div>
+            <div class="panel-tags">
+              <div class="panel-tag">Hydrogen hybrid</div>
+              <div class="panel-tag">Autonomous climb & cruise</div>
             </div>
-            <div style="font-size: 11px;">
-              Data refreshed every <strong>15s</strong> (demo)
-            </div>
+            <div>Telemetries refresh every <strong>15s</strong> (demo)</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- TICKER -->
-
     <div class="ticker">
-      <div class="ticker-label">Briefing</div>
+      <div class="ticker-label">Airspace ticker</div>
       <div class="ticker-track">
         <div class="ticker-items" id="tickerItems">
-          <!-- Populated by JS -->
+          <!-- JS -->
         </div>
       </div>
     </div>
 
     <main>
       <!-- TECH RADAR -->
-
       <section id="tech">
         <div class="section-header">
           <div class="section-title-wrap">
             <div class="section-kicker">Tech radar</div>
-            <div class="section-title">Aviation technologies on the move</div>
+            <div class="section-title">Aviation technologies on your scope</div>
             <div class="section-sub">
-              Filter by domain to see current focus areas across propulsion, autonomy, sustainability, and airspace.
+              Filter by domain to see active programs—from propulsion and autonomy to air-traffic tools and spaceflight.
             </div>
           </div>
           <div class="section-controls">
-            <div class="chip-row" id="techFilterChips">
-              <!-- chips via JS -->
-            </div>
+            <div class="chip-row" id="techFilterChips"></div>
           </div>
         </div>
 
-        <div class="grid" id="techGrid">
-          <!-- cards via JS -->
-        </div>
+        <div class="grid" id="techGrid"></div>
       </section>
 
-      <!-- NEWS FEED -->
-
+      <!-- NEWS -->
       <section id="news">
         <div class="section-header">
           <div class="section-title-wrap">
             <div class="section-kicker">News feed</div>
             <div class="section-title">Curated aviation & aerospace headlines</div>
             <div class="section-sub">
-              Sorted by freshness by default. Click any story to open a detailed brief.
+              Search and sort through sample stories. Click any card to open a clean, focused brief.
             </div>
           </div>
           <div class="section-controls">
@@ -1541,37 +1647,32 @@
             <select id="newsSort">
               <option value="latest">Latest first</option>
               <option value="oldest">Oldest first</option>
-              <option value="impact">By impact score</option>
+              <option value="impact">By impact</option>
             </select>
           </div>
         </div>
 
         <div class="news-layout">
-          <div class="news-main" id="newsMain">
-            <!-- main news via JS -->
-          </div>
+          <div class="news-main" id="newsMain"></div>
 
           <aside class="news-sidebar">
-            <div style="font-size: 12px; color: var(--muted); display:flex; justify-content:space-between; gap:8px;">
+            <div class="news-sidebar-header">
               <span>On your radar</span>
-              <span style="font-size: 11px;">Tap to open brief</span>
+              <span style="font-size: 11px;">Tap for full brief</span>
             </div>
-            <div class="news-chip-list" id="newsSidebar">
-              <!-- sidebar via JS -->
-            </div>
+            <div class="news-chip-list" id="newsSidebar"></div>
           </aside>
         </div>
       </section>
 
       <!-- INSIGHTS -->
-
       <section id="insights">
         <div class="section-header">
           <div class="section-title-wrap">
             <div class="section-kicker">Insight layers</div>
-            <div class="section-title">Where the industry is heading next</div>
+            <div class="section-title">Where the aviation world is heading</div>
             <div class="section-sub">
-              A quick snapshot of which themes are drawing the most engineering and regulatory attention this quarter.
+              A fast, visual snapshot of which themes are getting the strongest signal across the sample data above.
             </div>
           </div>
         </div>
@@ -1579,36 +1680,37 @@
         <div class="insights-grid">
           <div class="insights-card">
             <div class="badge-row">
-              <span>Regulatory & safety momentum</span>
-              <span style="font-size: 11px;">ICAO • EASA • FAA</span>
+              <span>Regulation & safety momentum</span>
+              <span>ICAO · EASA · FAA</span>
             </div>
-            <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">
-              Electric propulsion, autonomous taxi, and space-launch systems are converging on common safety patterns:
-              high redundancy, explainable automation, and rich telemetry backhaul.
+            <div style="color: var(--muted); margin-top: 4px;">
+              Electric and hydrogen propulsion, urban air mobility corridors, and reusable launch systems are converging
+              on similar patterns: layered autonomy, transparent safety cases, and extremely rich telemetry.
             </div>
+
             <div class="timeline">
               <div class="timeline-item">
                 <div class="timeline-year">2023 → 2024</div>
                 <div class="timeline-desc">
                   <div class="timeline-dot"></div>
-                  Electric regional aircraft programs move from concept to cert-ready prototypes; multiple hydrogen
-                  demo flights cross 1,000 cumulative hours.
+                  Electric regional aircraft move from concept to cert-ready prototypes. Hydrogen demonstrators pass
+                  1,000 cumulative hours.
                 </div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-year">2024 → 2025</div>
                 <div class="timeline-desc">
                   <div class="timeline-dot"></div>
-                  Urban air mobility airframes start limited route testing near major hubs under tight corridor
-                  control.
+                  Urban air mobility corridors open near major hubs, with carefully constrained flight envelopes and
+                  heavy community feedback.
                 </div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-year">2025+</div>
                 <div class="timeline-desc">
                   <div class="timeline-dot"></div>
-                  Hybrid configurations dominate fleets while fully hydrogen and all-electric routes remain
-                  high-profile but niche—yet extremely fast-moving.
+                  Hybrid and SAF-powered fleets dominate transitions, while fully hydrogen and all-electric routes stay
+                  niche—yet extremely fast-moving.
                 </div>
               </div>
             </div>
@@ -1617,28 +1719,25 @@
           <div class="insights-card">
             <div class="badge-row">
               <span>Signal strength by theme</span>
-              <span style="font-size: 11px;">Based on sample data</span>
+              <span>Based on sample set</span>
             </div>
-            <div class="insights-chart" id="insightsChart">
-              <!-- bars via JS -->
-            </div>
+            <div class="insights-chart" id="insightsChart"></div>
             <div class="chart-caption">
-              Each bar represents the relative count of mentioned topics across the news sample above. In a live system,
-              these would be recalculated continuously from external feeds.
+              Each bar reflects how often themes appear across the stories above. In a live deployment, these counts
+              would update continuously from your data sources.
             </div>
           </div>
         </div>
       </section>
 
       <!-- ABOUT / NEWSLETTER -->
-
       <section id="about">
         <div class="section-header">
           <div class="section-title-wrap">
             <div class="section-kicker">About</div>
-            <div class="section-title">What AeroScope is built for</div>
+            <div class="section-title">A single-file aviation console</div>
             <div class="section-sub">
-              Use this template as the base for your own live aviation dashboard or as a polished landing page.
+              Use AeroScope OS as a polished starting point for your own AI-powered aviation dashboard or news portal.
             </div>
           </div>
         </div>
@@ -1646,38 +1745,39 @@
         <div class="about-layout">
           <div class="about-text">
             <p>
-              AeroScope is a front-end only web app crafted to feel like a professional aviation technology console.
-              It ships with a tech radar, news layout, insight panels, and a subscription block—all wired with vanilla
-              JavaScript so you can extend it however you like.
+              This interface is intentionally built as a single <strong>index.html</strong>: no frameworks, no build
+              step. Everything you see—layout, state management, animations—is driven by clean HTML, CSS and vanilla JS.
             </p>
             <p>
-              Replace the sample datasets with your own API calls or static JSON, plug in real images, and connect the
-              newsletter block to a back-end or email provider. Everything here is responsive, minimal in dependencies,
-              and easy to adapt.
+              Swap the sample datasets with live APIs, plug headlines into your own LLM layer, or connect the newsletter
+              card to an email provider. The layout is flexible enough for large desktop screens and compact phones.
             </p>
             <div class="about-highlight">
-              <span><strong>Tip</strong>: connect this UI to a news API to keep the “latest” view truly live.</span>
-              <span>⚙️ Built with HTML + CSS + JS only</span>
+              <span>
+                <strong>Tip:</strong> connect the news feed to a real aviation API, then add AI summaries to each story.
+              </span>
+              <span>⚙️ Pure front-end · Extensible</span>
             </div>
           </div>
 
           <div class="newsletter-card" id="newsletter">
-            <div style="font-size: 13px; font-weight: 500;">
+            <div style="font-size: 13px; font-weight: 600;">
               Subscribe to the runway report
             </div>
             <div style="font-size: 12px; color: var(--muted);">
-              Get a short, focused summary of key aviation technology moves—no spam, just structured signal.
+              A short, structured brief of important moves in aviation tech. No clutter—just clear signal.
             </div>
 
             <form id="newsletterForm" class="newsletter-row">
               <input type="email" id="newsletterEmail" placeholder="you@example.com" required />
               <button class="btn-small" type="submit">
-                Join briefing list <span>➝</span>
+                Join early access
+                <span>➝</span>
               </button>
             </form>
 
             <div class="newsletter-note" id="newsletterStatus">
-              Your email stays local in this demo—wire this up to your own back-end to go live.
+              Demo only: your email stays in the browser. Wire this up to your back-end or email service to take it live.
             </div>
           </div>
         </div>
@@ -1685,20 +1785,19 @@
     </main>
 
     <footer>
-      <div>© <span id="year"></span> AeroScope. Front-end demo for aviation-focused dashboards.</div>
+      <div>© <span id="year"></span> AeroScope OS · A light, futuristic aviation console mockup.</div>
       <div class="footer-links">
         <a href="#top">Back to top</a>
         <a href="#tech">Tech radar</a>
-        <a href="#news">News feed</a>
+        <a href="#news">News</a>
         <a href="#insights">Insights</a>
       </div>
     </footer>
   </div>
 
   <!-- FLOATING CONTROLS -->
-
   <div class="floating-controls">
-    <button class="fab fab-theme" id="themeToggle" title="Toggle theme">
+    <button class="fab fab-theme" id="themeToggle" title="Toggle soft dark/light">
       ☾
     </button>
     <button class="fab hidden" id="scrollTopBtn" title="Back to top">
@@ -1707,7 +1806,6 @@
   </div>
 
   <!-- MODAL -->
-
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal">
       <div class="modal-header">
@@ -1720,14 +1818,14 @@
   </div>
 
   <script>
-    // --- SAMPLE DATA --------------------------------------------------------
+    // ---------- SAMPLE DATA ----------
 
     const tickerSample = [
-      "EASA publishes updated guidance on electric aircraft certification.",
-      "Major carrier commits to 10% SAF blend on all European flights by 2030.",
-      "New single-pilot ops trial explores supervised autonomy on regional routes.",
-      "Urban air mobility test corridor extended to connect secondary airports.",
-      "Reusable first stage completes 20th successful landing in current program."
+      "EASA publishes fresh guidance on electric aircraft certification.",
+      "Major carrier targets 10% SAF blend on all regional routes by 2030.",
+      "Single-pilot assisted ops enter supervised trials on short-haul flights.",
+      "Urban air mobility corridor extended to connect secondary cities.",
+      "Reusable boosters change the economics of small satellite launches."
     ];
 
     const techCategories = [
@@ -1747,7 +1845,7 @@
         stage: "Flight test",
         updated: "2025-11-16",
         summary:
-          "Hybrid hydrogen turbofan system promising a 20–30% cut in lifecycle emissions for mid-range routes.",
+          "Hybrid hydrogen turbofan system promising a 20–30% lifecycle emissions drop on mid-range routes.",
         tags: ["Hydrogen", "Hybrid", "Narrow-body"]
       },
       {
@@ -1756,8 +1854,8 @@
         stage: "Regulatory sandbox",
         updated: "2025-11-20",
         summary:
-          "Advanced assistance stack supports one human pilot with certified auto-decision tooling.",
-        tags: ["AI co-pilot", "Computer vision", "Human factors"]
+          "AI assistance stack supports one human pilot with explainable decision tools and robust overrides.",
+        tags: ["AI co-pilot", "Vision", "Human factors"]
       },
       {
         title: "Dynamic 4D trajectory management",
@@ -1765,8 +1863,8 @@
         stage: "Live trials",
         updated: "2025-11-09",
         summary:
-          "Collaborative decision tools predict and resolve conflicts minutes before they appear on scopes.",
-        tags: ["ATM", "4D paths", "Data fusion"]
+          "Collaborative tools that predict conflicts minutes earlier than legacy systems for busy airspace.",
+        tags: ["4D paths", "Data fusion", "CDM"]
       },
       {
         title: "End-to-end SAF logistics platform",
@@ -1774,8 +1872,8 @@
         stage: "Commercial",
         updated: "2025-10-30",
         summary:
-          "Tracks sustainable aviation fuel from refinery to wing tip, verifying blend ratios and chain of custody.",
-        tags: ["SAF", "Lifecycle", "Blockchain"]
+          "Tracks sustainable aviation fuel from refinery to wingtip with verified blend ratios.",
+        tags: ["SAF", "Supply chain", "Lifecycle"]
       },
       {
         title: "Adaptive turbulence-aware cabin",
@@ -1783,8 +1881,8 @@
         stage: "Concept cabin",
         updated: "2025-11-11",
         summary:
-          "Smart lighting, seat dynamics, and notification flows that adapt live to turbulence severity.",
-        tags: ["Passenger experience", "Sensors", "Human factors"]
+          "Cabin lighting, seat dynamics, and announcements adapt dynamically to predicted turbulence.",
+        tags: ["Passenger UX", "Sensors", "Comfort"]
       },
       {
         title: "Reusable micro-launch air-drop system",
@@ -1792,7 +1890,7 @@
         stage: "Orbital demo",
         updated: "2025-11-18",
         summary:
-          "Modified wide-body aircraft serve as a mobile launch pad for small payloads into LEO.",
+          "Modified wide-body aircraft act as flexible launch platforms for small payloads into LEO.",
         tags: ["LEO", "Micro-launch", "Reusability"]
       },
       {
@@ -1801,7 +1899,7 @@
         stage: "Fleet retrofit",
         updated: "2025-11-12",
         summary:
-          "Sensor mesh detects fatigue and corrosion early, extending the life of existing airframes.",
+          "Sensor networks detect structural fatigue early, extending airframe life and reducing waste.",
         tags: ["SHM", "Analytics", "Retrofit"]
       },
       {
@@ -1810,17 +1908,17 @@
         stage: "Airport trials",
         updated: "2025-10-28",
         summary:
-          "Low-speed autonomy handles taxi out/in while the human pilot monitors and can override.",
-        tags: ["Ground ops", "Sensors", "V2X"]
+          "Low-speed autonomy handles taxi while pilots supervise and retain full override authority.",
+        tags: ["Ground ops", "V2X", "Autonomy"]
       },
       {
         title: "AI-assisted sector planning for controllers",
         category: "Air Traffic",
-        stage: "Early deployment",
+        stage: "Deployment",
         updated: "2025-10-25",
         summary:
-          "System suggests optimal sector splits and staffing ahead of predicted demand spikes.",
-        tags: ["Controller tools", "Forecasting", "Safety"]
+          "Decision support surfaces likely complexity hotspots before they hit controller workload limits.",
+        tags: ["ATC tools", "Forecasting", "Safety"]
       }
     ];
 
@@ -1834,16 +1932,16 @@
         source: "IndustryWire",
         location: "Hamburg, Germany",
         excerpt:
-          "A modified narrow-body equipped with a hydrogen hybrid powertrain carried 40 passengers on a short proving flight.",
+          "A modified narrow-body carrying 40 passengers completed a proving flight on a hydrogen-hybrid system.",
         body: [
-          "The demonstration flight followed months of ground runs and captive tests. Engineers focused on validating the fuel system, thermal management, and engine response in typical climb and cruise profiles.",
-          "While this hop was limited to a short sector, the program’s roadmap targets regional routes of 500–800 nautical miles, with future test campaigns exploring extended ranges as infrastructure matures.",
-          "Regulators observing the flight highlighted the importance of real-world operational data, from cold-soak conditions to refuelling turnaround times."
+          "The demonstration followed an extended campaign of ground runs and captive tests focused on fuel-system stability and thermal management.",
+          "The program now aims at regional routes between 500–800 nautical miles, expanding as infrastructure and certification frameworks evolve.",
+          "Regulators were on board to observe handling, redundancy behaviour, and turnaround characteristics at the hydrogen refuel point."
         ],
         keyPoints: [
-          "40-passenger test load with full safety backup systems.",
-          "Hybrid powertrain responsible for a majority of thrust in cruise.",
-          "Program now moves into multi-leg route simulations over the next quarter."
+          "40-passenger test with full backup systems.",
+          "Hydrogen hybrid produced most thrust at cruise.",
+          "Multi-leg simulated route trials scheduled for the next quarter."
         ]
       },
       {
@@ -1855,16 +1953,16 @@
         source: "AeroDaily",
         location: "Paris, France",
         excerpt:
-          "Authorities approve a new test corridor linking secondary cities with the main airport under strict operating envelopes.",
+          "Authorities approved a new eVTOL test corridor linking secondary cities with the main airport.",
         body: [
-          "The corridor allows a small fleet of eVTOL aircraft to operate along predefined routes, with tight altitude and speed constraints designed to limit noise and integrate safely with existing traffic.",
-          "Operational data from the trial will feed into future decisions around permanent vertiport locations and procedures for mixed traffic environments.",
-          "Local communities have been invited to provide feedback on noise and visual impact throughout the test phase."
+          "The corridor operates with strict altitude and speed windows to minimise noise and avoid conflicts with existing traffic.",
+          "Data from operations will influence vertiport placement, separation standards, and integration procedures with classic IFR flows.",
+          "Local residents can track test flights and submit feedback about noise and visual impact via a dedicated portal."
         ],
         keyPoints: [
-          "Trial includes both passenger and cargo demonstration flights.",
-          "Operations restricted to selected daytime windows.",
-          "Real-time tracking data shared with air navigation service providers."
+          "Includes both passenger and cargo demonstration flights.",
+          "Operations limited to selected daytime windows.",
+          "Live telemetry shared with air navigation providers."
         ]
       },
       {
@@ -1876,16 +1974,16 @@
         source: "ATC Journal",
         location: "Atlanta, USA",
         excerpt:
-          "A machine-learning powered advisor is now helping controllers anticipate complexity minutes earlier than before.",
+          "A machine-learning advisor now highlights upcoming sector complexity before it hits controller workload peaks.",
         body: [
-          "The assistant ingests radar tracks, flight plans, weather data, and historical patterns to highlight sectors that may hit workload thresholds.",
-          "Rather than issuing commands directly, the system surfaces annotated suggestions that controllers can accept, modify, or ignore.",
-          "Early trials suggest a reduction in peak workload and fewer last-minute sector re-configurations."
+          "The system ingests radar tracks, flight plans, weather layers, and local procedures to forecast traffic complexity.",
+          "Rather than issuing clearances, it offers suggestions and impact scores that controllers can accept or ignore.",
+          "Early results show smoother sector splits and fewer last-minute configuration changes during peaks."
         ],
         keyPoints: [
-          "Designed as a decision support tool, not an automated controller.",
-          "Strong emphasis on explainability and clear rationale for suggestions.",
-          "Roll-out includes extended training programs for controllers and supervisors."
+          "Designed explicitly as decision support, not automation.",
+          "Emphasis on explainable suggestions and cross-checks.",
+          "Includes extended training modules for controllers."
         ]
       },
       {
@@ -1897,16 +1995,16 @@
         source: "GreenAero",
         location: "Seattle, USA",
         excerpt:
-          "The deal boosts sustainable aviation fuel availability on transatlantic routes, supporting ambitious emissions targets.",
+          "A new agreement secures multi-year sustainable aviation fuel supplies for key long-haul routes.",
         body: [
-          "The agreement covers millions of tonnes of SAF over a multi-year horizon, with flexible options to expand volumes as supply scales.",
-          "Airports along key transatlantic corridors will see dedicated infrastructure upgrades, including segregated storage and new blending facilities.",
-          "Analysts say such long-term commitments are critical to unlocking investment in next-generation feedstocks."
+          "The contract covers large volumes with options to scale as production ramps, supporting fleet-wide emissions targets.",
+          "Several airports will add dedicated infrastructure, including segregated tanks and new blending equipment.",
+          "Analysts say long-horizon offtakes remain essential to unlock investment in advanced SAF feedstocks."
         ],
         keyPoints: [
-          "Supports airline’s plan to cut net emissions intensity by 30% by 2035.",
-          "Includes detailed reporting on lifecycle emissions performance.",
-          "Tied to broader airport modernisation and energy projects."
+          "Supports a 30% net emissions-intensity reduction plan by 2035.",
+          "Detailed lifecycle reporting embedded into the contract.",
+          "Linked to broader airport decarbonisation projects."
         ]
       },
       {
@@ -1918,37 +2016,37 @@
         source: "OrbitLog",
         location: "Cape Canaveral, USA",
         excerpt:
-          "A privately operated booster returned for its 20th landing, extending what was once an experimental target.",
+          "A commercial booster completed its 20th flight and landing, extending reuse beyond original design goals.",
         body: [
-          "The booster supported a mix of commercial and governmental missions, with only incremental refurbishment between flights.",
-          "Engineers are now focusing on pushing turnaround times down further while maintaining margins on reliability.",
-          "Observers note that such reusability is reshaping the economics of satellite deployment and future crewed missions."
+          "The booster flew a mix of institutional and commercial payloads with relatively minimal refurbishment.",
+          "Teams are targeting faster turnarounds while carefully tracking structural and engine-cycle margins.",
+          "The milestone further shifts expectations around launch cadence and cost for small satellite deployments."
         ],
         keyPoints: [
-          "Current design life extended beyond original published targets.",
-          "Thermal protection and engine cycles remain under close scrutiny.",
-          "Expectations rise for partially or fully reusable second stages."
+          "Design life extended past initial public targets.",
+          "Thermal and structural health remain under tight monitoring.",
+          "Strengthens the case for reusable upper stages."
         ]
       },
       {
         id: 6,
-        title: "Cabin turbulence alerting gets smarter with new sensor mesh",
+        title: "Cabin turbulence alerting gets smarter with sensor mesh",
         category: "Cabin & UX",
         date: "2025-11-08",
         impact: 6.8,
         source: "PassengerTech",
         location: "Tokyo, Japan",
         excerpt:
-          "Dozens of cabin-level sensors now feed turbulence models, giving passengers and crew earlier, gentler warnings.",
+          "Cabin-level sensors now refine turbulence predictions, giving passengers earlier, calmer warnings.",
         body: [
-          "The system uses accelerometers and seat-level data to refine predictions of discomfort, triggering pre-emptive actions such as dimming lights and suspending cart service.",
-          "Crew tools show a unified timeline of expected bumps, helping them time announcements and seat-belt sign changes.",
-          "Airlines hope smoother handling of turbulence will improve satisfaction and reduce the risk of in-cabin injuries."
+          "Seat-level accelerometers and distributed sensors feed a model that predicts discomfort before it spikes.",
+          "Systems coordinate lighting, PA announcements, and service decisions to smooth the experience.",
+          "Airlines expect fewer in-cabin injuries and improved satisfaction scores on routes with frequent bumps."
         ],
         keyPoints: [
-          "Focus on comfort, safety, and clear communication.",
-          "Can be retrofitted into existing cabins over several checks.",
-          "Designed to integrate with existing flight deck turbulence tools."
+          "Retrofit-friendly design works with existing cabins.",
+          "Plugs into cockpit turbulence tools for a unified picture.",
+          "Focuses on comfort, communication, and injury reduction."
         ]
       }
     ];
@@ -1961,7 +2059,7 @@
       { theme: "Space launch", value: 79 }
     ];
 
-    // --- RENDER HELPERS -----------------------------------------------------
+    // ---------- UTILITIES ----------
 
     function formatDate(dateStr) {
       const d = new Date(dateStr);
@@ -1973,9 +2071,9 @@
     }
 
     function daysAgo(dateStr) {
-      const d = new Date(dateStr).getTime();
+      const t = new Date(dateStr).getTime();
       const now = Date.now();
-      const diff = Math.max(0, now - d);
+      const diff = Math.max(0, now - t);
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       if (days === 0) return "Today";
       if (days === 1) return "1 day ago";
@@ -1985,7 +2083,21 @@
       return `${weeks} weeks ago`;
     }
 
-    // TECH RADAR
+    // ---------- TICKER ----------
+
+    function renderTicker() {
+      const container = document.getElementById("tickerItems");
+      container.innerHTML = "";
+      const combined = tickerSample.concat(tickerSample); // loop
+      combined.forEach((text, idx) => {
+        const span = document.createElement("span");
+        span.className = "ticker-item";
+        span.innerHTML = idx === 0 ? `<strong>Now</strong> — ${text}` : text;
+        container.appendChild(span);
+      });
+    }
+
+    // ---------- TECH RADAR ----------
 
     function renderTechFilterChips() {
       const container = document.getElementById("techFilterChips");
@@ -1997,9 +2109,7 @@
         chip.dataset.cat = cat;
         chip.textContent = cat;
         chip.addEventListener("click", () => {
-          document
-            .querySelectorAll("#techFilterChips .chip")
-            .forEach((c) => c.classList.remove("active"));
+          document.querySelectorAll("#techFilterChips .chip").forEach((c) => c.classList.remove("active"));
           chip.classList.add("active");
           renderTechGrid(cat);
         });
@@ -2020,8 +2130,8 @@
           const card = document.createElement("article");
           card.className = "card";
           card.innerHTML = `
-            <div class="card-tag-row">
-              <span class="card-tag">${item.category}</span>
+            <div class="card-top-row">
+              <span class="card-badge">${item.category}</span>
               <span>${item.stage}</span>
             </div>
             <h3 class="card-title">${item.title}</h3>
@@ -2034,25 +2144,19 @@
               <span class="card-link">Details <span>↗</span></span>
             </div>
           `;
-          card.querySelector(".card-link").addEventListener("click", () => {
-            openModalFromTech(item);
-          });
+          card.querySelector(".card-link").addEventListener("click", () => openModalFromTech(item));
           grid.appendChild(card);
         });
     }
 
-    // NEWS
+    // ---------- NEWS ----------
 
-    function getSortedNews(sortMode) {
-      const items = newsItems.slice();
-      if (sortMode === "latest") {
-        items.sort((a, b) => new Date(b.date) - new Date(a.date));
-      } else if (sortMode === "oldest") {
-        items.sort((a, b) => new Date(a.date) - new Date(b.date));
-      } else if (sortMode === "impact") {
-        items.sort((a, b) => b.impact - a.impact);
-      }
-      return items;
+    function getSortedNews(mode) {
+      const arr = newsItems.slice();
+      if (mode === "latest") arr.sort((a, b) => new Date(b.date) - new Date(a.date));
+      else if (mode === "oldest") arr.sort((a, b) => new Date(a.date) - new Date(b.date));
+      else if (mode === "impact") arr.sort((a, b) => b.impact - a.impact);
+      return arr;
     }
 
     function renderNews(searchTerm = "", sortMode = "latest") {
@@ -2104,32 +2208,11 @@
         }
       });
 
-      // Update metric
       const metric = document.getElementById("metricArticles");
-      if (metric) {
-        metric.textContent = sorted.length;
-      }
+      if (metric) metric.textContent = sorted.length;
     }
 
-    // TICKER
-
-    function renderTicker() {
-      const container = document.getElementById("tickerItems");
-      container.innerHTML = "";
-      const combined = tickerSample.concat(tickerSample); // loop smoothly
-      combined.forEach((text, idx) => {
-        const span = document.createElement("span");
-        span.className = "ticker-item";
-        if (idx === 0) {
-          span.innerHTML = `<strong>Now</strong> — ${text}`;
-        } else {
-          span.textContent = text;
-        }
-        container.appendChild(span);
-      });
-    }
-
-    // INSIGHT CHART
+    // ---------- INSIGHT CHART ----------
 
     function renderInsightsChart() {
       const container = document.getElementById("insightsChart");
@@ -2144,7 +2227,7 @@
       });
     }
 
-    // MODAL
+    // ---------- MODAL ----------
 
     const modalBackdrop = document.getElementById("modalBackdrop");
     const modalTitle = document.getElementById("modalTitle");
@@ -2187,8 +2270,7 @@
             : ""
         }
         <p style="font-size:11px; opacity:0.85;">
-          Replace this placeholder content with data fetched from your own API, or with a deeper
-          write-up on the underlying technology and programs.
+          Replace this placeholder content with deep-dive notes or connect to your own data source for live program status.
         </p>
       `;
       modalBackdrop.classList.add("active");
@@ -2199,12 +2281,10 @@
     });
 
     modalBackdrop.addEventListener("click", (e) => {
-      if (e.target === modalBackdrop) {
-        modalBackdrop.classList.remove("active");
-      }
+      if (e.target === modalBackdrop) modalBackdrop.classList.remove("active");
     });
 
-    // NAV / SCROLL
+    // ---------- NAV & SCROLL ----------
 
     const navToggle = document.getElementById("navToggle");
     const mobileMenu = document.getElementById("mobileMenu");
@@ -2223,7 +2303,7 @@
     function smoothScrollTo(selector) {
       const el = document.querySelector(selector);
       if (!el) return;
-      const y = el.getBoundingClientRect().top + window.pageYOffset - 70;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 72;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 
@@ -2234,52 +2314,56 @@
       });
     });
 
-    // THEME TOGGLE (simple dark/light accent variation)
+    // ---------- THEME TOGGLE (soft dark variant) ----------
 
     const themeToggle = document.getElementById("themeToggle");
-    let themeState = "dark";
+    let themeState = "light";
 
     themeToggle.addEventListener("click", () => {
-      if (themeState === "dark") {
-        document.documentElement.style.setProperty("--bg", "#f3f4f6");
-        document.documentElement.style.setProperty("--bg-alt", "#e5e7eb");
-        document.documentElement.style.setProperty("--card", "#ffffff");
-        document.documentElement.style.setProperty("--text", "#020617");
-        document.documentElement.style.setProperty("--muted", "#4b5563");
-        document.body.style.background =
-          "radial-gradient(circle at top, #e5e7eb 0, #f3f4f6 45%)";
-        themeState = "light";
-        themeToggle.textContent = "☀︎";
-      } else {
+      if (themeState === "light") {
+        // switch to a soft dark
         document.documentElement.style.setProperty("--bg", "#050814");
         document.documentElement.style.setProperty("--bg-alt", "#070b1e");
-        document.documentElement.style.setProperty("--card", "#0c1024");
-        document.documentElement.style.setProperty("--text", "#f9fbff");
+        document.documentElement.style.setProperty("--surface", "#070b1e");
+        document.documentElement.style.setProperty("--surface-soft", "rgba(15,23,42,0.9)");
+        document.documentElement.style.setProperty("--text", "#f9fafb");
         document.documentElement.style.setProperty("--muted", "#9ca4c9");
+        document.documentElement.style.setProperty("--muted-soft", "#9ca4c9");
+        document.documentElement.style.setProperty("--border-subtle", "rgba(148,163,184,0.4)");
         document.body.style.background =
-          "radial-gradient(circle at top, #111936 0, #050814 45%)";
+          "radial-gradient(circle at top, #111827 0, #020617 45%, #020617 100%)";
         themeState = "dark";
+        themeToggle.textContent = "☀︎";
+      } else {
+        // back to light
+        document.documentElement.style.setProperty("--bg", "#f5f7fb");
+        document.documentElement.style.setProperty("--bg-alt", "#eef1f9");
+        document.documentElement.style.setProperty("--surface", "#ffffff");
+        document.documentElement.style.setProperty("--surface-soft", "rgba(255,255,255,0.8)");
+        document.documentElement.style.setProperty("--text", "#020617");
+        document.documentElement.style.setProperty("--muted", "#6b7280");
+        document.documentElement.style.setProperty("--muted-soft", "#9ca3af");
+        document.documentElement.style.setProperty("--border-subtle", "rgba(15,23,42,0.06)");
+        document.body.style.background =
+          "radial-gradient(circle at top left, #e0edff 0, transparent 60%), radial-gradient(circle at top right, #f3e8ff 0, transparent 55%), linear-gradient(to bottom, #f8fafc, #e5ebf8 55%, #eef2ff 100%)";
+        themeState = "light";
         themeToggle.textContent = "☾";
       }
     });
 
-    // BACK TO TOP BUTTON
+    // ---------- SCROLL TOP FAB ----------
 
     const scrollTopBtn = document.getElementById("scrollTopBtn");
-
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollTopBtn.classList.remove("hidden");
-      } else {
-        scrollTopBtn.classList.add("hidden");
-      }
+      if (window.scrollY > 280) scrollTopBtn.classList.remove("hidden");
+      else scrollTopBtn.classList.add("hidden");
     });
 
     scrollTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // NEWSLETTER (demo only)
+    // ---------- NEWSLETTER (demo) ----------
 
     const newsletterForm = document.getElementById("newsletterForm");
     const newsletterStatus = document.getElementById("newsletterStatus");
@@ -2290,21 +2374,26 @@
       const email = emailInput.value.trim();
       if (!email) return;
       newsletterStatus.textContent =
-        "Thanks! In a real deployment, this would send your email to your back-end or email provider.";
+        "Thanks for subscribing. In a real app, this would call your API or email provider.";
       emailInput.value = "";
     });
 
-    // FOOTER YEAR
+    // ---------- FOOTER YEAR ----------
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // INITIAL RENDER
+    // ---------- INITIAL RENDER ----------
 
+    renderTicker();
     renderTechFilterChips();
     renderTechGrid("All");
-    renderTicker();
     renderNews("", "latest");
     renderInsightsChart();
+
+    const newsSearch = document.getElementById("newsSearch");
+    const newsSort = document.getElementById("newsSort");
+    newsSearch.addEventListener("input", () => renderNews(newsSearch.value, newsSort.value));
+    newsSort.addEventListener("change", () => renderNews(newsSearch.value, newsSort.value));
   </script>
 </body>
 </html>
