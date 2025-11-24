@@ -1,0 +1,2310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AeroScope – Aviation Tech & News</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="AeroScope is your live dashboard for aviation technology trends, aerospace innovation, and curated aviation news."
+  />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #070b1e;
+      --card: #0c1024;
+      --accent: #4ea8ff;
+      --accent-soft: rgba(78, 168, 255, 0.2);
+      --accent-strong: #7b5cff;
+      --accent-danger: #ff6b6b;
+      --text: #f9fbff;
+      --muted: #9ca4c9;
+      --border: rgba(255, 255, 255, 0.06);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #111936 0, #050814 45%);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 18px 48px;
+    }
+
+    /* Header / Nav */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 8, 20, 0.9),
+        rgba(5, 8, 20, 0.6),
+        transparent
+      );
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto 14px;
+      padding: 10px 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 20%, #4ea8ff 0, #111936 45%, #050814 90%);
+      box-shadow: 0 0 18px rgba(78, 168, 255, 0.6);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.2s ease all;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: var(--accent-soft);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-soft);
+      padding: 6px 11px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .nav-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #00ffb2;
+      box-shadow: 0 0 12px rgba(0, 255, 178, 0.9);
+    }
+
+    .btn-subscribe-nav {
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #f5f7ff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 24px rgba(78, 168, 255, 0.5);
+    }
+
+    .btn-subscribe-nav span {
+      font-size: 14px;
+    }
+
+    .nav-toggle {
+      display: none;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      background: rgba(7, 11, 30, 0.9);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0 18px 10px;
+      padding: 10px 12px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: rgba(5, 8, 20, 0.96);
+    }
+
+    .mobile-menu a {
+      font-size: 14px;
+      padding: 6px 4px;
+      border-radius: 10px;
+      color: var(--muted);
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+    }
+
+    /* Hero */
+
+    .hero {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-soft);
+      padding: 5px 10px;
+      background: rgba(12, 16, 36, 0.9);
+      color: var(--muted);
+    }
+
+    .hero-badge-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.1;
+      font-weight: 600;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 460px;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      border-radius: var(--radius-pill);
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-ghost {
+      border-radius: var(--radius-pill);
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      background: rgba(7, 11, 30, 0.9);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-metric {
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: rgba(7, 11, 30, 0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 120px;
+    }
+
+    .hero-metric strong {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hero-graphic {
+      position: relative;
+      height: 100%;
+      min-height: 260px;
+    }
+
+    .hero-panel {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background-image: radial-gradient(circle at 10% 10%, rgba(148, 163, 255, 0.14), transparent 50%),
+        radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.13), transparent 55%),
+        radial-gradient(circle at 70% 100%, rgba(248, 250, 252, 0.06), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .panel-top {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .panel-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .panel-chip {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.5);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .panel-chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+    }
+
+    .flight-map {
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+      flex: 1;
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(148, 163, 255, 0.5);
+      padding: 12px;
+      background: rgba(15, 23, 42, 0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .flight-map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .flight-route {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .flight-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(78, 168, 255, 0.9);
+    }
+
+    .flight-route span {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .trajectory {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .trajectory-line {
+      flex: 1;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), rgba(148, 163, 255, 0.2));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trajectory-plane {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.7);
+      background: radial-gradient(circle at 30% 30%, #e5f4ff 0, #1d2841 60%);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: fly 4.2s infinite linear;
+    }
+
+    .trajectory-label {
+      font-size: 11px;
+      color: var(--muted);
+      min-width: 82px;
+      text-align: right;
+    }
+
+    @keyframes fly {
+      from {
+        left: 0%;
+      }
+      to {
+        left: 100%;
+      }
+    }
+
+    .flight-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .flight-stat {
+      padding: 7px 8px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .flight-stat span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .flight-stat strong {
+      font-size: 12px;
+    }
+
+    .panel-footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .panel-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .panel-badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.3);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    /* Ticker */
+
+    .ticker {
+      margin-top: 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: rgba(7, 11, 30, 0.9);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: 12px;
+    }
+
+    .ticker-label {
+      padding: 8px 12px;
+      background: rgba(148, 163, 255, 0.18);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .ticker-track {
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .ticker-items {
+      display: inline-flex;
+      gap: 30px;
+      padding-left: 18px;
+      white-space: nowrap;
+      animation: ticker 26s linear infinite;
+    }
+
+    .ticker-item {
+      color: var(--muted);
+    }
+
+    .ticker-item strong {
+      color: var(--accent);
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0%);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Sections */
+
+    main {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    section {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: rgba(7, 11, 30, 0.96);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+      padding: 16px 16px 18px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    select,
+    input[type="search"] {
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: 12px;
+      outline: none;
+      min-width: 140px;
+    }
+
+    input[type="search"]::placeholder {
+      color: var(--muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.18s ease all;
+    }
+
+    .chip.active {
+      border-color: var(--accent);
+      color: var(--text);
+      background: rgba(37, 99, 235, 0.2);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Tech Grid */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, #0b1220 0, #020617 70%);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 50%);
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(96, 165, 250, 0.8);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-tag-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .card-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 255, 0.4);
+      padding: 2px 7px;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .card-link span {
+      font-size: 15px;
+      transform: translateY(1px);
+    }
+
+    /* News layout */
+
+    .news-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.1fr);
+      gap: 16px;
+    }
+
+    .news-main {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .news-card {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 10px;
+      background: radial-gradient(circle at top left, #111827 0, #020617 65%);
+      cursor: pointer;
+      transition: 0.18s ease all;
+    }
+
+    .news-card:hover {
+      border-color: rgba(96, 165, 250, 0.8);
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-2px);
+    }
+
+    .news-thumb {
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      background-image: linear-gradient(135deg, #0f172a, #020617);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .news-thumb-label {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.86);
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 255, 0.5);
+    }
+
+    .news-body {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 12px;
+    }
+
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .news-excerpt {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .news-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .news-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .news-chip-list {
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .news-mini {
+      padding: 7px 9px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: 0.18s ease all;
+    }
+
+    .news-mini:hover {
+      border-color: rgba(96, 165, 250, 0.8);
+      transform: translateY(-1px);
+    }
+
+    .news-mini-title {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    /* Insights / Timeline */
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+      gap: 14px;
+    }
+
+    .insights-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 12px;
+      background: radial-gradient(circle at top, #020617 0, #020617 80%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .timeline {
+      margin-top: 8px;
+      border-radius: 14px;
+      border: 1px dashed rgba(148, 163, 255, 0.5);
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr);
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .timeline-year {
+      color: var(--muted);
+    }
+
+    .timeline-desc {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.9);
+    }
+
+    .insights-chart {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 6px;
+      align-items: flex-end;
+      height: 120px;
+    }
+
+    .chart-bar {
+      position: relative;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(79, 70, 229, 0.3));
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-size: 10px;
+      color: #e5edff;
+    }
+
+    .chart-bar::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: -16px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .chart-bar span {
+      margin-bottom: 4px;
+      font-weight: 500;
+      font-size: 11px;
+    }
+
+    .chart-caption {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* About / Newsletter */
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.3fr);
+      gap: 16px;
+    }
+
+    .about-text {
+      font-size: 12px;
+      color: var(--muted);
+      display: grid;
+      gap: 10px;
+    }
+
+    .about-highlight {
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    .about-highlight strong {
+      color: var(--text);
+    }
+
+    .newsletter-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, #0f172a 0, #020617 80%);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .newsletter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .newsletter-row input[type="email"] {
+      flex: 1;
+      min-width: 170px;
+    }
+
+    .btn-small {
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .newsletter-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      padding: 2px 4px;
+    }
+
+    /* Floating buttons */
+
+    .floating-controls {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 60;
+    }
+
+    .fab {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(7, 11, 30, 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.7);
+    }
+
+    .fab.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: all 0.18s ease;
+    }
+
+    .fab:not(.hidden) {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.18s ease;
+    }
+
+    .fab-theme {
+      font-size: 18px;
+    }
+
+    /* Modal */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 70;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      max-width: 640px;
+      width: 94%;
+      max-height: 80vh;
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(7, 11, 30, 0.98);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+      padding: 16px;
+      font-size: 13px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 3px 7px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .modal-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .modal-body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .modal-body p {
+      margin: 0 0 8px;
+    }
+
+    .modal-body ul {
+      padding-left: 16px;
+      margin: 0 0 8px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1.1fr);
+      }
+
+      .hero-graphic {
+        order: -1;
+      }
+
+      .news-layout,
+      .insights-grid,
+      .about-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero {
+        margin-top: 8px;
+      }
+
+      .ticker {
+        flex-direction: column;
+      }
+
+      .ticker-label {
+        width: 100%;
+      }
+
+      .ticker-track {
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .news-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .flight-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 14px 12px 36px;
+      }
+
+      section {
+        padding: 12px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-metric {
+        min-width: 100px;
+      }
+
+      .floating-controls {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .nav {
+        padding-inline: 12px;
+      }
+
+      .mobile-menu {
+        margin-inline: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <div class="logo-mark">✈︎</div>
+        <div class="logo-text">
+          <div class="logo-title">AeroScope</div>
+          <div class="logo-sub">Aviation • Tech • Intel</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#top">Overview</a>
+        <a href="#tech">Tech Radar</a>
+        <a href="#news">News Feed</a>
+        <a href="#insights">Insights</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="nav-cta">
+        <div class="nav-pill">
+          <span class="nav-pill-dot"></span>
+          Live aviation brief
+        </div>
+        <button class="btn-subscribe-nav" data-scroll="#newsletter">
+          <span>★</span> Subscribe
+        </button>
+      </div>
+      <button class="nav-toggle" id="navToggle">☰</button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#top">Overview</a>
+      <a href="#tech">Tech Radar</a>
+      <a href="#news">News Feed</a>
+      <a href="#insights">Insights</a>
+      <a href="#about">About</a>
+      <a href="#newsletter">Newsletter</a>
+    </div>
+  </header>
+
+  <div class="page" id="top">
+    <!-- HERO -->
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="hero-badge">
+          <span class="hero-badge-tag">Live</span>
+          Real-time view of aviation innovation
+        </div>
+        <h1 class="hero-title">
+          Track <span>aviation technology</span> & breaking aerospace news in one responsive console.
+        </h1>
+        <p class="hero-sub">
+          AeroScope blends curated news, technology radar, and trend insight into a single interface—designed for
+          engineers, students, and aviation obsessives.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary" data-scroll="#news">
+            Open live briefing <span>↗</span>
+          </button>
+          <button class="btn-ghost" data-scroll="#tech">
+            Explore tech radar
+          </button>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="hero-metric">
+            <strong id="metricArticles">32</strong>
+            stories in the last 24 hours
+          </div>
+          <div class="hero-metric">
+            <strong id="metricDomains">12</strong>
+            tracked domains & categories
+          </div>
+          <div class="hero-metric">
+            <strong>Real-time</strong>
+            layout fully responsive
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-graphic">
+        <div class="hero-panel">
+          <div class="panel-top">
+            <div>
+              <div class="panel-tag">Flight systems snapshot</div>
+              <div style="font-size: 11px; color: var(--muted); margin-top: 2px;">
+                Synthetic telemetry from next-gen narrow-body jets
+              </div>
+            </div>
+            <div class="panel-chip">
+              <span class="panel-chip-dot"></span>
+              Stable conditions
+            </div>
+          </div>
+
+          <div class="flight-map">
+            <div class="flight-map-header">
+              <div class="flight-route">
+                <div class="flight-dot"></div>
+                FRA ➝ DXB
+                <span> Hydrogen-assisted test route</span>
+              </div>
+              <div style="font-size: 11px;">
+                FL370 • Mach 0.78
+              </div>
+            </div>
+
+            <div class="trajectory">
+              <div class="trajectory-line">
+                <div class="trajectory-plane"></div>
+              </div>
+              <div class="trajectory-label">
+                ETA: <strong>02:13</strong> hrs
+              </div>
+            </div>
+
+            <div class="flight-stats">
+              <div class="flight-stat">
+                <span>Fuel burn vs. baseline</span>
+                <strong>-21.4%</strong>
+              </div>
+              <div class="flight-stat">
+                <span>CO₂ reduction</span>
+                <strong>32.9%</strong>
+              </div>
+              <div class="flight-stat">
+                <span>Auto-pilot confidence</span>
+                <strong>99.2%</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <div class="panel-badges">
+              <div class="panel-badge">Hydrogen hybrid systems</div>
+              <div class="panel-badge">Autonomous climb & cruise</div>
+            </div>
+            <div style="font-size: 11px;">
+              Data refreshed every <strong>15s</strong> (demo)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+
+    <div class="ticker">
+      <div class="ticker-label">Briefing</div>
+      <div class="ticker-track">
+        <div class="ticker-items" id="tickerItems">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- TECH RADAR -->
+
+      <section id="tech">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-kicker">Tech radar</div>
+            <div class="section-title">Aviation technologies on the move</div>
+            <div class="section-sub">
+              Filter by domain to see current focus areas across propulsion, autonomy, sustainability, and airspace.
+            </div>
+          </div>
+          <div class="section-controls">
+            <div class="chip-row" id="techFilterChips">
+              <!-- chips via JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" id="techGrid">
+          <!-- cards via JS -->
+        </div>
+      </section>
+
+      <!-- NEWS FEED -->
+
+      <section id="news">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-kicker">News feed</div>
+            <div class="section-title">Curated aviation & aerospace headlines</div>
+            <div class="section-sub">
+              Sorted by freshness by default. Click any story to open a detailed brief.
+            </div>
+          </div>
+          <div class="section-controls">
+            <input type="search" id="newsSearch" placeholder="Search news…" />
+            <select id="newsSort">
+              <option value="latest">Latest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="impact">By impact score</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="news-layout">
+          <div class="news-main" id="newsMain">
+            <!-- main news via JS -->
+          </div>
+
+          <aside class="news-sidebar">
+            <div style="font-size: 12px; color: var(--muted); display:flex; justify-content:space-between; gap:8px;">
+              <span>On your radar</span>
+              <span style="font-size: 11px;">Tap to open brief</span>
+            </div>
+            <div class="news-chip-list" id="newsSidebar">
+              <!-- sidebar via JS -->
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- INSIGHTS -->
+
+      <section id="insights">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-kicker">Insight layers</div>
+            <div class="section-title">Where the industry is heading next</div>
+            <div class="section-sub">
+              A quick snapshot of which themes are drawing the most engineering and regulatory attention this quarter.
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-grid">
+          <div class="insights-card">
+            <div class="badge-row">
+              <span>Regulatory & safety momentum</span>
+              <span style="font-size: 11px;">ICAO • EASA • FAA</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">
+              Electric propulsion, autonomous taxi, and space-launch systems are converging on common safety patterns:
+              high redundancy, explainable automation, and rich telemetry backhaul.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">2023 → 2024</div>
+                <div class="timeline-desc">
+                  <div class="timeline-dot"></div>
+                  Electric regional aircraft programs move from concept to cert-ready prototypes; multiple hydrogen
+                  demo flights cross 1,000 cumulative hours.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2024 → 2025</div>
+                <div class="timeline-desc">
+                  <div class="timeline-dot"></div>
+                  Urban air mobility airframes start limited route testing near major hubs under tight corridor
+                  control.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2025+</div>
+                <div class="timeline-desc">
+                  <div class="timeline-dot"></div>
+                  Hybrid configurations dominate fleets while fully hydrogen and all-electric routes remain
+                  high-profile but niche—yet extremely fast-moving.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="insights-card">
+            <div class="badge-row">
+              <span>Signal strength by theme</span>
+              <span style="font-size: 11px;">Based on sample data</span>
+            </div>
+            <div class="insights-chart" id="insightsChart">
+              <!-- bars via JS -->
+            </div>
+            <div class="chart-caption">
+              Each bar represents the relative count of mentioned topics across the news sample above. In a live system,
+              these would be recalculated continuously from external feeds.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT / NEWSLETTER -->
+
+      <section id="about">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-kicker">About</div>
+            <div class="section-title">What AeroScope is built for</div>
+            <div class="section-sub">
+              Use this template as the base for your own live aviation dashboard or as a polished landing page.
+            </div>
+          </div>
+        </div>
+
+        <div class="about-layout">
+          <div class="about-text">
+            <p>
+              AeroScope is a front-end only web app crafted to feel like a professional aviation technology console.
+              It ships with a tech radar, news layout, insight panels, and a subscription block—all wired with vanilla
+              JavaScript so you can extend it however you like.
+            </p>
+            <p>
+              Replace the sample datasets with your own API calls or static JSON, plug in real images, and connect the
+              newsletter block to a back-end or email provider. Everything here is responsive, minimal in dependencies,
+              and easy to adapt.
+            </p>
+            <div class="about-highlight">
+              <span><strong>Tip</strong>: connect this UI to a news API to keep the “latest” view truly live.</span>
+              <span>⚙️ Built with HTML + CSS + JS only</span>
+            </div>
+          </div>
+
+          <div class="newsletter-card" id="newsletter">
+            <div style="font-size: 13px; font-weight: 500;">
+              Subscribe to the runway report
+            </div>
+            <div style="font-size: 12px; color: var(--muted);">
+              Get a short, focused summary of key aviation technology moves—no spam, just structured signal.
+            </div>
+
+            <form id="newsletterForm" class="newsletter-row">
+              <input type="email" id="newsletterEmail" placeholder="you@example.com" required />
+              <button class="btn-small" type="submit">
+                Join briefing list <span>➝</span>
+              </button>
+            </form>
+
+            <div class="newsletter-note" id="newsletterStatus">
+              Your email stays local in this demo—wire this up to your own back-end to go live.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> AeroScope. Front-end demo for aviation-focused dashboards.</div>
+      <div class="footer-links">
+        <a href="#top">Back to top</a>
+        <a href="#tech">Tech radar</a>
+        <a href="#news">News feed</a>
+        <a href="#insights">Insights</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- FLOATING CONTROLS -->
+
+  <div class="floating-controls">
+    <button class="fab fab-theme" id="themeToggle" title="Toggle theme">
+      ☾
+    </button>
+    <button class="fab hidden" id="scrollTopBtn" title="Back to top">
+      ↑
+    </button>
+  </div>
+
+  <!-- MODAL -->
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle"></div>
+        <button class="modal-close" id="modalClose">Close ✕</button>
+      </div>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- SAMPLE DATA --------------------------------------------------------
+
+    const tickerSample = [
+      "EASA publishes updated guidance on electric aircraft certification.",
+      "Major carrier commits to 10% SAF blend on all European flights by 2030.",
+      "New single-pilot ops trial explores supervised autonomy on regional routes.",
+      "Urban air mobility test corridor extended to connect secondary airports.",
+      "Reusable first stage completes 20th successful landing in current program."
+    ];
+
+    const techCategories = [
+      "All",
+      "Propulsion",
+      "Autonomy",
+      "Air Traffic",
+      "Sustainability",
+      "Cabin & UX",
+      "Spaceflight"
+    ];
+
+    const techItems = [
+      {
+        title: "Hydrogen hybrid narrow-body platform",
+        category: "Propulsion",
+        stage: "Flight test",
+        updated: "2025-11-16",
+        summary:
+          "Hybrid hydrogen turbofan system promising a 20–30% cut in lifecycle emissions for mid-range routes.",
+        tags: ["Hydrogen", "Hybrid", "Narrow-body"]
+      },
+      {
+        title: "Single-pilot assisted flight deck",
+        category: "Autonomy",
+        stage: "Regulatory sandbox",
+        updated: "2025-11-20",
+        summary:
+          "Advanced assistance stack supports one human pilot with certified auto-decision tooling.",
+        tags: ["AI co-pilot", "Computer vision", "Human factors"]
+      },
+      {
+        title: "Dynamic 4D trajectory management",
+        category: "Air Traffic",
+        stage: "Live trials",
+        updated: "2025-11-09",
+        summary:
+          "Collaborative decision tools predict and resolve conflicts minutes before they appear on scopes.",
+        tags: ["ATM", "4D paths", "Data fusion"]
+      },
+      {
+        title: "End-to-end SAF logistics platform",
+        category: "Sustainability",
+        stage: "Commercial",
+        updated: "2025-10-30",
+        summary:
+          "Tracks sustainable aviation fuel from refinery to wing tip, verifying blend ratios and chain of custody.",
+        tags: ["SAF", "Lifecycle", "Blockchain"]
+      },
+      {
+        title: "Adaptive turbulence-aware cabin",
+        category: "Cabin & UX",
+        stage: "Concept cabin",
+        updated: "2025-11-11",
+        summary:
+          "Smart lighting, seat dynamics, and notification flows that adapt live to turbulence severity.",
+        tags: ["Passenger experience", "Sensors", "Human factors"]
+      },
+      {
+        title: "Reusable micro-launch air-drop system",
+        category: "Spaceflight",
+        stage: "Orbital demo",
+        updated: "2025-11-18",
+        summary:
+          "Modified wide-body aircraft serve as a mobile launch pad for small payloads into LEO.",
+        tags: ["LEO", "Micro-launch", "Reusability"]
+      },
+      {
+        title: "Continuous structural health monitoring",
+        category: "Sustainability",
+        stage: "Fleet retrofit",
+        updated: "2025-11-12",
+        summary:
+          "Sensor mesh detects fatigue and corrosion early, extending the life of existing airframes.",
+        tags: ["SHM", "Analytics", "Retrofit"]
+      },
+      {
+        title: "Taxi-phase autonomous ground ops",
+        category: "Autonomy",
+        stage: "Airport trials",
+        updated: "2025-10-28",
+        summary:
+          "Low-speed autonomy handles taxi out/in while the human pilot monitors and can override.",
+        tags: ["Ground ops", "Sensors", "V2X"]
+      },
+      {
+        title: "AI-assisted sector planning for controllers",
+        category: "Air Traffic",
+        stage: "Early deployment",
+        updated: "2025-10-25",
+        summary:
+          "System suggests optimal sector splits and staffing ahead of predicted demand spikes.",
+        tags: ["Controller tools", "Forecasting", "Safety"]
+      }
+    ];
+
+    const newsItems = [
+      {
+        id: 1,
+        title: "Hydrogen test aircraft completes first commercial-style hop",
+        category: "Propulsion",
+        date: "2025-11-21",
+        impact: 9.1,
+        source: "IndustryWire",
+        location: "Hamburg, Germany",
+        excerpt:
+          "A modified narrow-body equipped with a hydrogen hybrid powertrain carried 40 passengers on a short proving flight.",
+        body: [
+          "The demonstration flight followed months of ground runs and captive tests. Engineers focused on validating the fuel system, thermal management, and engine response in typical climb and cruise profiles.",
+          "While this hop was limited to a short sector, the program’s roadmap targets regional routes of 500–800 nautical miles, with future test campaigns exploring extended ranges as infrastructure matures.",
+          "Regulators observing the flight highlighted the importance of real-world operational data, from cold-soak conditions to refuelling turnaround times."
+        ],
+        keyPoints: [
+          "40-passenger test load with full safety backup systems.",
+          "Hybrid powertrain responsible for a majority of thrust in cruise.",
+          "Program now moves into multi-leg route simulations over the next quarter."
+        ]
+      },
+      {
+        id: 2,
+        title: "Urban air mobility corridor expands near major European hub",
+        category: "Urban air mobility",
+        date: "2025-11-19",
+        impact: 7.4,
+        source: "AeroDaily",
+        location: "Paris, France",
+        excerpt:
+          "Authorities approve a new test corridor linking secondary cities with the main airport under strict operating envelopes.",
+        body: [
+          "The corridor allows a small fleet of eVTOL aircraft to operate along predefined routes, with tight altitude and speed constraints designed to limit noise and integrate safely with existing traffic.",
+          "Operational data from the trial will feed into future decisions around permanent vertiport locations and procedures for mixed traffic environments.",
+          "Local communities have been invited to provide feedback on noise and visual impact throughout the test phase."
+        ],
+        keyPoints: [
+          "Trial includes both passenger and cargo demonstration flights.",
+          "Operations restricted to selected daytime windows.",
+          "Real-time tracking data shared with air navigation service providers."
+        ]
+      },
+      {
+        id: 3,
+        title: "New AI assistant for air traffic controllers enters live ops",
+        category: "Air Traffic",
+        date: "2025-11-17",
+        impact: 8.6,
+        source: "ATC Journal",
+        location: "Atlanta, USA",
+        excerpt:
+          "A machine-learning powered advisor is now helping controllers anticipate complexity minutes earlier than before.",
+        body: [
+          "The assistant ingests radar tracks, flight plans, weather data, and historical patterns to highlight sectors that may hit workload thresholds.",
+          "Rather than issuing commands directly, the system surfaces annotated suggestions that controllers can accept, modify, or ignore.",
+          "Early trials suggest a reduction in peak workload and fewer last-minute sector re-configurations."
+        ],
+        keyPoints: [
+          "Designed as a decision support tool, not an automated controller.",
+          "Strong emphasis on explainability and clear rationale for suggestions.",
+          "Roll-out includes extended training programs for controllers and supervisors."
+        ]
+      },
+      {
+        id: 4,
+        title: "Major airline signs multi-year SAF offtake agreement",
+        category: "Sustainability",
+        date: "2025-11-14",
+        impact: 7.9,
+        source: "GreenAero",
+        location: "Seattle, USA",
+        excerpt:
+          "The deal boosts sustainable aviation fuel availability on transatlantic routes, supporting ambitious emissions targets.",
+        body: [
+          "The agreement covers millions of tonnes of SAF over a multi-year horizon, with flexible options to expand volumes as supply scales.",
+          "Airports along key transatlantic corridors will see dedicated infrastructure upgrades, including segregated storage and new blending facilities.",
+          "Analysts say such long-term commitments are critical to unlocking investment in next-generation feedstocks."
+        ],
+        keyPoints: [
+          "Supports airline’s plan to cut net emissions intensity by 30% by 2035.",
+          "Includes detailed reporting on lifecycle emissions performance.",
+          "Tied to broader airport modernisation and energy projects."
+        ]
+      },
+      {
+        id: 5,
+        title: "Reusable first-stage booster reaches record reuse milestone",
+        category: "Spaceflight",
+        date: "2025-11-10",
+        impact: 8.9,
+        source: "OrbitLog",
+        location: "Cape Canaveral, USA",
+        excerpt:
+          "A privately operated booster returned for its 20th landing, extending what was once an experimental target.",
+        body: [
+          "The booster supported a mix of commercial and governmental missions, with only incremental refurbishment between flights.",
+          "Engineers are now focusing on pushing turnaround times down further while maintaining margins on reliability.",
+          "Observers note that such reusability is reshaping the economics of satellite deployment and future crewed missions."
+        ],
+        keyPoints: [
+          "Current design life extended beyond original published targets.",
+          "Thermal protection and engine cycles remain under close scrutiny.",
+          "Expectations rise for partially or fully reusable second stages."
+        ]
+      },
+      {
+        id: 6,
+        title: "Cabin turbulence alerting gets smarter with new sensor mesh",
+        category: "Cabin & UX",
+        date: "2025-11-08",
+        impact: 6.8,
+        source: "PassengerTech",
+        location: "Tokyo, Japan",
+        excerpt:
+          "Dozens of cabin-level sensors now feed turbulence models, giving passengers and crew earlier, gentler warnings.",
+        body: [
+          "The system uses accelerometers and seat-level data to refine predictions of discomfort, triggering pre-emptive actions such as dimming lights and suspending cart service.",
+          "Crew tools show a unified timeline of expected bumps, helping them time announcements and seat-belt sign changes.",
+          "Airlines hope smoother handling of turbulence will improve satisfaction and reduce the risk of in-cabin injuries."
+        ],
+        keyPoints: [
+          "Focus on comfort, safety, and clear communication.",
+          "Can be retrofitted into existing cabins over several checks.",
+          "Designed to integrate with existing flight deck turbulence tools."
+        ]
+      }
+    ];
+
+    const insightThemeSignal = [
+      { theme: "Hydrogen & electric", value: 92 },
+      { theme: "Urban air mobility", value: 74 },
+      { theme: "AI & automation", value: 88 },
+      { theme: "SAF & lifecycle", value: 81 },
+      { theme: "Space launch", value: 79 }
+    ];
+
+    // --- RENDER HELPERS -----------------------------------------------------
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function daysAgo(dateStr) {
+      const d = new Date(dateStr).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, now - d);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      if (days === 0) return "Today";
+      if (days === 1) return "1 day ago";
+      if (days < 7) return `${days} days ago`;
+      const weeks = Math.floor(days / 7);
+      if (weeks === 1) return "1 week ago";
+      return `${weeks} weeks ago`;
+    }
+
+    // TECH RADAR
+
+    function renderTechFilterChips() {
+      const container = document.getElementById("techFilterChips");
+      container.innerHTML = "";
+      techCategories.forEach((cat, idx) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (idx === 0 ? " active" : "");
+        chip.dataset.cat = cat;
+        chip.textContent = cat;
+        chip.addEventListener("click", () => {
+          document
+            .querySelectorAll("#techFilterChips .chip")
+            .forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+          renderTechGrid(cat);
+        });
+        container.appendChild(chip);
+      });
+    }
+
+    function renderTechGrid(filterCat = "All") {
+      const grid = document.getElementById("techGrid");
+      grid.innerHTML = "";
+      const items = techItems.filter(
+        (item) => filterCat === "All" || item.category === filterCat
+      );
+      items
+        .slice()
+        .sort((a, b) => new Date(b.updated) - new Date(a.updated))
+        .forEach((item) => {
+          const card = document.createElement("article");
+          card.className = "card";
+          card.innerHTML = `
+            <div class="card-tag-row">
+              <span class="card-tag">${item.category}</span>
+              <span>${item.stage}</span>
+            </div>
+            <h3 class="card-title">${item.title}</h3>
+            <div>${item.summary}</div>
+            <div class="pill-row">
+              ${item.tags.map((t) => `<span class="pill">${t}</span>`).join("")}
+            </div>
+            <div class="card-footer">
+              <span>Updated ${daysAgo(item.updated)}</span>
+              <span class="card-link">Details <span>↗</span></span>
+            </div>
+          `;
+          card.querySelector(".card-link").addEventListener("click", () => {
+            openModalFromTech(item);
+          });
+          grid.appendChild(card);
+        });
+    }
+
+    // NEWS
+
+    function getSortedNews(sortMode) {
+      const items = newsItems.slice();
+      if (sortMode === "latest") {
+        items.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (sortMode === "oldest") {
+        items.sort((a, b) => new Date(a.date) - new Date(b.date));
+      } else if (sortMode === "impact") {
+        items.sort((a, b) => b.impact - a.impact);
+      }
+      return items;
+    }
+
+    function renderNews(searchTerm = "", sortMode = "latest") {
+      const term = searchTerm.trim().toLowerCase();
+      const sorted = getSortedNews(sortMode).filter((item) => {
+        if (!term) return true;
+        return (
+          item.title.toLowerCase().includes(term) ||
+          item.category.toLowerCase().includes(term) ||
+          item.excerpt.toLowerCase().includes(term)
+        );
+      });
+
+      const main = document.getElementById("newsMain");
+      const sidebar = document.getElementById("newsSidebar");
+      main.innerHTML = "";
+      sidebar.innerHTML = "";
+
+      sorted.forEach((item, index) => {
+        const mainCard = document.createElement("article");
+        mainCard.className = "news-card";
+        mainCard.innerHTML = `
+          <div class="news-thumb">
+            <div class="news-thumb-label">${item.category}</div>
+          </div>
+          <div class="news-body">
+            <h3 class="news-title">${item.title}</h3>
+            <p class="news-excerpt">${item.excerpt}</p>
+            <div class="news-meta">
+              <span>${formatDate(item.date)} • Impact ${item.impact.toFixed(1)}</span>
+              <span>${item.source} • ${item.location}</span>
+            </div>
+          </div>
+        `;
+        mainCard.addEventListener("click", () => openModalFromNews(item));
+        main.appendChild(mainCard);
+
+        if (index < 4) {
+          const mini = document.createElement("article");
+          mini.className = "news-mini";
+          mini.innerHTML = `
+            <div class="news-mini-title">${item.title}</div>
+            <div style="font-size:11px; color:var(--muted);">
+              ${item.category} • ${daysAgo(item.date)}
+            </div>
+          `;
+          mini.addEventListener("click", () => openModalFromNews(item));
+          sidebar.appendChild(mini);
+        }
+      });
+
+      // Update metric
+      const metric = document.getElementById("metricArticles");
+      if (metric) {
+        metric.textContent = sorted.length;
+      }
+    }
+
+    // TICKER
+
+    function renderTicker() {
+      const container = document.getElementById("tickerItems");
+      container.innerHTML = "";
+      const combined = tickerSample.concat(tickerSample); // loop smoothly
+      combined.forEach((text, idx) => {
+        const span = document.createElement("span");
+        span.className = "ticker-item";
+        if (idx === 0) {
+          span.innerHTML = `<strong>Now</strong> — ${text}`;
+        } else {
+          span.textContent = text;
+        }
+        container.appendChild(span);
+      });
+    }
+
+    // INSIGHT CHART
+
+    function renderInsightsChart() {
+      const container = document.getElementById("insightsChart");
+      container.innerHTML = "";
+      insightThemeSignal.forEach((item) => {
+        const bar = document.createElement("div");
+        bar.className = "chart-bar";
+        bar.style.height = Math.max(30, item.value) + "%";
+        bar.dataset.label = item.theme.split(" ")[0];
+        bar.innerHTML = `<span>${item.value}</span>`;
+        container.appendChild(bar);
+      });
+    }
+
+    // MODAL
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMeta = document.getElementById("modalMeta");
+    const modalBody = document.getElementById("modalBody");
+    const modalClose = document.getElementById("modalClose");
+
+    function openModalFromNews(item) {
+      modalTitle.textContent = item.title;
+      modalMeta.innerHTML = `
+        <span>${item.category} • ${formatDate(item.date)}</span>
+        <span>${item.source} • ${item.location} • Impact ${item.impact.toFixed(1)}</span>
+      `;
+      modalBody.innerHTML = `
+        ${item.body.map((p) => `<p>${p}</p>`).join("")}
+        ${
+          item.keyPoints?.length
+            ? `<p><strong>Key points</strong></p><ul>${item.keyPoints
+                .map((k) => `<li>${k}</li>`)
+                .join("")}</ul>`
+            : ""
+        }
+      `;
+      modalBackdrop.classList.add("active");
+    }
+
+    function openModalFromTech(item) {
+      modalTitle.textContent = item.title;
+      modalMeta.innerHTML = `
+        <span>${item.category} • ${item.stage}</span>
+        <span>Last updated ${formatDate(item.updated)}</span>
+      `;
+      modalBody.innerHTML = `
+        <p>${item.summary}</p>
+        ${
+          item.tags?.length
+            ? `<p><strong>Focus areas</strong></p><ul>${item.tags
+                .map((t) => `<li>${t}</li>`)
+                .join("")}</ul>`
+            : ""
+        }
+        <p style="font-size:11px; opacity:0.85;">
+          Replace this placeholder content with data fetched from your own API, or with a deeper
+          write-up on the underlying technology and programs.
+        </p>
+      `;
+      modalBackdrop.classList.add("active");
+    }
+
+    modalClose.addEventListener("click", () => {
+      modalBackdrop.classList.remove("active");
+    });
+
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) {
+        modalBackdrop.classList.remove("active");
+      }
+    });
+
+    // NAV / SCROLL
+
+    const navToggle = document.getElementById("navToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    navToggle.addEventListener("click", () => {
+      const open = mobileMenu.style.display === "flex";
+      mobileMenu.style.display = open ? "none" : "flex";
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.style.display = "none";
+      });
+    });
+
+    function smoothScrollTo(selector) {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 70;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-scroll]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-scroll");
+        smoothScrollTo(target);
+      });
+    });
+
+    // THEME TOGGLE (simple dark/light accent variation)
+
+    const themeToggle = document.getElementById("themeToggle");
+    let themeState = "dark";
+
+    themeToggle.addEventListener("click", () => {
+      if (themeState === "dark") {
+        document.documentElement.style.setProperty("--bg", "#f3f4f6");
+        document.documentElement.style.setProperty("--bg-alt", "#e5e7eb");
+        document.documentElement.style.setProperty("--card", "#ffffff");
+        document.documentElement.style.setProperty("--text", "#020617");
+        document.documentElement.style.setProperty("--muted", "#4b5563");
+        document.body.style.background =
+          "radial-gradient(circle at top, #e5e7eb 0, #f3f4f6 45%)";
+        themeState = "light";
+        themeToggle.textContent = "☀︎";
+      } else {
+        document.documentElement.style.setProperty("--bg", "#050814");
+        document.documentElement.style.setProperty("--bg-alt", "#070b1e");
+        document.documentElement.style.setProperty("--card", "#0c1024");
+        document.documentElement.style.setProperty("--text", "#f9fbff");
+        document.documentElement.style.setProperty("--muted", "#9ca4c9");
+        document.body.style.background =
+          "radial-gradient(circle at top, #111936 0, #050814 45%)";
+        themeState = "dark";
+        themeToggle.textContent = "☾";
+      }
+    });
+
+    // BACK TO TOP BUTTON
+
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.remove("hidden");
+      } else {
+        scrollTopBtn.classList.add("hidden");
+      }
+    });
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // NEWSLETTER (demo only)
+
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterStatus = document.getElementById("newsletterStatus");
+
+    newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById("newsletterEmail");
+      const email = emailInput.value.trim();
+      if (!email) return;
+      newsletterStatus.textContent =
+        "Thanks! In a real deployment, this would send your email to your back-end or email provider.";
+      emailInput.value = "";
+    });
+
+    // FOOTER YEAR
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // INITIAL RENDER
+
+    renderTechFilterChips();
+    renderTechGrid("All");
+    renderTicker();
+    renderNews("", "latest");
+    renderInsightsChart();
+  </script>
+</body>
+</html>
